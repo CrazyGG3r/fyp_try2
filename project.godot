@@ -10,11 +10,6 @@ config_version=5
 
 [application]
 
-config/name="fyp_try2"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/name="Fyp Try 2"
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
