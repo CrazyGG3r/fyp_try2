@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://qekduw06wxrn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuk17"]
+radius = 0.64
+
+[sub_resource type="SphereMesh" id="SphereMesh_5icq0"]
+
+[node name="Ball" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(25, 25)
+shape = SubResource("CircleShape2D_tuk17")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.588235, 0.294118, 0, 1)
+scale = Vector2(31.4223, 31.4223)
+mesh = SubResource("SphereMesh_5icq0")
