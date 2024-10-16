@@ -8,7 +8,6 @@ func _physics_process(delta):
 	
 	# Calculate velocity
 	velocity = input_direction * speed
-	
 	# Move and slide will handle collision
 	move_and_slide()
 

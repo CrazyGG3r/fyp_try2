@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b57ssadvd2nqa" path="res://Scenes/abdomen.tscn" id="1_ccva3"]
 [ext_resource type="PackedScene" uid="uid://b46ys5m1vhaqq" path="res://Scenes/wall.tscn" id="2_hduop"]
 [ext_resource type="PackedScene" uid="uid://c4k66te11imjr" path="res://Scenes/wall_vert.tscn" id="3_0mn25"]
-[ext_resource type="PackedScene" uid="uid://qekduw06wxrn" path="res://Scenes/ball.tscn" id="4_pr584"]
 [ext_resource type="PackedScene" uid="uid://bfijko50i52sm" path="res://Scenes/goal.tscn" id="5_auabh"]
+[ext_resource type="Script" path="res://Scenes/Node2D.gd" id="5_ke75n"]
 
 [node name="Main" type="Node2D"]
 
@@ -20,9 +20,6 @@ position = Vector2(1272, 352)
 [node name="wall_bot" parent="." instance=ExtResource("2_hduop")]
 position = Vector2(640, 712)
 
-[node name="Ball" parent="." instance=ExtResource("4_pr584")]
-position = Vector2(512, 320)
-
 [node name="abdomen" parent="." instance=ExtResource("1_ccva3")]
 position = Vector2(408, 296)
 
@@ -31,3 +28,6 @@ position = Vector2(64, 352)
 
 [node name="Goal" parent="." instance=ExtResource("5_auabh")]
 position = Vector2(1216, 352)
+
+[node name="Host" type="Node2D" parent="."]
+script = ExtResource("5_ke75n")
