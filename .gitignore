@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 .vs/
+/.vs/fyp_try2/v17/.wsuo
+/.vs/slnx.sqlite
