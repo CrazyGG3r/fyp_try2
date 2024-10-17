@@ -3,3 +3,5 @@
 .vs/
 /.vs/fyp_try2/v17/.wsuo
 /.vs/slnx.sqlite
+/.venv_agent/
+/.vs/VSWorkspaceState.json
