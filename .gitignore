@@ -6,3 +6,4 @@
 /.venv_agent/
 /.vs/VSWorkspaceState.json
 /Dummy_Agent/venv_agent
+/Dummy_Agent/__pycache__
