@@ -107,8 +107,8 @@ class Text:
     def draw(self, screen):
         screen.blit(self.surface, (self.x, self.y))
     
-    def updateColor(self):
-        self.changecolor(self.color_list[12])
+    def updateColor(self,color):
+        self.changecolor(color)
 
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
@@ -118,8 +118,8 @@ class button:
         self.coords = coords
         self.x = coords[0]
         self.y = coords[1]
-        self.width = size
-        self.height = size
+        self.width = size - 10
+        self.height = size - 10
         self.pad_x = self.x - (size/1.3)
         self.pad_y = self.y - (size/4)
         self.size = size
@@ -133,11 +133,13 @@ class button:
         self.hover = False
     def draw(self, screen):
         if self.hover == True:
-            self.shape.change_color(self.Activecolor)
             self.shape.angularVelocity = 4
+            self.shape.change_color(self.Activecolor)
+            self.text.updateColor(self.Inactivecolor)
         else: 
             self.shape.angularVelocity = 0.5
             self.shape.change_color(self.Inactivecolor)
+            self.text.updateColor(self.Activecolor)
            
         self.shape.rotate(screen)
         self.shape.draw(screen)
@@ -152,7 +154,7 @@ running = True
 testtest = Text((400,100),120,(10,1,1),"The Brain")
 
 txtt = Text((0,0),40,(192,20,2),"Connect")
-button1 = button((200,200),80,(10,1,10),(200,200,200),txtt,7)
+button1 = button((200,200),80,(20,1,1),(195,25,5),txtt,7)
 all_butts = [button1]
 while running:
     clock.tick(60)
@@ -180,13 +182,16 @@ while running:
                                 a.isClicked = False
     m = pygame.mouse.get_pos()
     for a in all_butts:
-        if m[0] > a.x - a.size and m[1] > a.y - a.size:
+        if m[0] > a.x - a.width and m[1] > a.y - a.height:
             if m[0] < (a.x + a.width) and m[1] < (a.y + a.height):
                 a.hover = True
             else:
                 a.hover = False
         else:
             a.hover = False
+    for a in clicked_buttons:
+        print("cock")
+
     
 
 pygame.quit()
