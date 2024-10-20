@@ -112,22 +112,81 @@ class Text:
 
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
+
+class button:
+    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6):
+        self.coords = coords
+        self.x = coords[0]
+        self.y = coords[1]
+        self.width = size
+        self.height = size
+        self.pad_x = self.x - (size/1.3)
+        self.pad_y = self.y - (size/4)
+        self.size = size
+        self.Inactivecolor = colorInactive
+        self.Activecolor = colorActive
+        self.text = textObj
+        self.text.update_coords((self.pad_x,self.pad_y))
+        self.shape = Polygon(sides,self.coords,self.Inactivecolor,self.size,speed=0)#button doesnt need to move xd
+        #flags
+        self.isClicked = False
+        self.hover = False
+    def draw(self, screen):
+        if self.hover == True:
+            self.shape.change_color(self.Activecolor)
+            self.shape.angularVelocity = 4
+        else: 
+            self.shape.angularVelocity = 0.5
+            self.shape.change_color(self.Inactivecolor)
+           
+        self.shape.rotate(screen)
+        self.shape.draw(screen)
+        self.text.draw(screen)
         
-bg = Background(amount=250)
+        
+
+bg = Background(amount=200)
 clock = pygame.time.Clock()
 running = True
 
-testtest = Text((400,100),120,(1,1,1),"The Brain")
+testtest = Text((400,100),120,(10,1,1),"The Brain")
+
+txtt = Text((0,0),40,(192,20,2),"Connect")
+button1 = button((200,200),80,(10,1,10),(200,200,200),txtt,7)
+all_butts = [button1]
 while running:
     clock.tick(60)
     screen.fill((1,1,1))
-    
+    clicked_buttons = []
     bg.draw(screen)
     testtest.draw(screen)
+    for a in all_butts:
+        a.draw(screen)
+        
     pygame.display.flip()
   
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for a in all_butts:
+                    if a.hover:
+                        if not a.isClicked:
+                            a.isClicked = True
+                            clicked_buttons.append(a)
+                    if event.type == pygame.MOUSEBUTTONUP:
+                        for a in all_butts:
+                            if a.hover:
+                                a.isClicked = False
+    m = pygame.mouse.get_pos()
+    for a in all_butts:
+        if m[0] > a.x - a.size and m[1] > a.y - a.size:
+            if m[0] < (a.x + a.width) and m[1] < (a.y + a.height):
+                a.hover = True
+            else:
+                a.hover = False
+        else:
+            a.hover = False
+    
 
 pygame.quit()
