@@ -3,8 +3,6 @@ import math
 import random as r
 from toools import diffuser
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("Hexagon Drawing")
 font = ["Dummy_Agent\\assets\\Fonts\\f1.ttf"]
 
 class Polygon:
@@ -20,7 +18,7 @@ class Polygon:
         self.Polypoints = []
         self.angle = 0 
         self.angularVelocity  = angular_velocity
-        
+        self.flag = 0
         for i in range(0,self.sides):
             angle = math.radians((360/self.sides) * i)
             x = self.x + self.size * math.cos(angle)
@@ -39,7 +37,10 @@ class Polygon:
         
     def rotate(self,screen):
         self.Polypoints = []
-        self.angle += self.angularVelocity  
+        if self.flag  == 0:
+            self.angle += self.angularVelocity  
+        else:
+            self.angle -= self.angularVelocity
         for i in range(0, self.sides):
             angle = math.radians((360 / self.sides) * i + self.angle)
             x = self.x + self.size * math.cos(angle)
@@ -112,7 +113,6 @@ class Text:
 
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
-
 class button:
     def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6):
         self.coords = coords
@@ -147,51 +147,3 @@ class button:
         
         
 
-bg = Background(amount=200)
-clock = pygame.time.Clock()
-running = True
-
-testtest = Text((400,100),120,(10,1,1),"The Brain")
-
-txtt = Text((0,0),40,(192,20,2),"Connect")
-button1 = button((200,200),80,(20,1,1),(195,25,5),txtt,7)
-all_butts = [button1]
-while running:
-    clock.tick(60)
-    screen.fill((1,1,1))
-    clicked_buttons = []
-    bg.draw(screen)
-    testtest.draw(screen)
-    for a in all_butts:
-        a.draw(screen)
-        
-    pygame.display.flip()
-  
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                for a in all_butts:
-                    if a.hover:
-                        if not a.isClicked:
-                            a.isClicked = True
-                            clicked_buttons.append(a)
-                    if event.type == pygame.MOUSEBUTTONUP:
-                        for a in all_butts:
-                            if a.hover:
-                                a.isClicked = False
-    m = pygame.mouse.get_pos()
-    for a in all_butts:
-        if m[0] > a.x - a.width and m[1] > a.y - a.height:
-            if m[0] < (a.x + a.width) and m[1] < (a.y + a.height):
-                a.hover = True
-            else:
-                a.hover = False
-        else:
-            a.hover = False
-    for a in clicked_buttons:
-        print("cock")
-
-    
-
-pygame.quit()
