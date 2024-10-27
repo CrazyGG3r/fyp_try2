@@ -4,7 +4,8 @@ import random as r
 from toools import diffuser
 pygame.init()
 font = ["Dummy_Agent\\assets\\Fonts\\f1.ttf"]
-
+def dummy(param1 = None,param2 = None):
+    print("you clicked something here")
 class Polygon:
     def __init__(self,sides = 4,coords = (100,100),color = (192,20,2),size =50,angular_velocity = 0.5 , speed = 0.5,direction = (-1,1)):
         self.sides = sides
@@ -68,17 +69,21 @@ class Polygon:
             y = self.y + self.size * math.sin(angle)
             self.Polypoints.append((x, y))
 class Background:
-    def __init__(self,amount = 100,direction = (1,0.5,-0.5,-1),sides = 9,theme = ((0,0,0),(192,20,2))):
+    def __init__(self,amount = 100,direction = (1,0.5,-0.5,-1),sides = 9,theme = ((0,0,0),(192,20,2)),speed = 0.5,size = 50,color_limit = 1,angular_velocity = 0.5 ):
         self.amount    = amount
         self.direction = direction
         self.sides     = sides
         self.polygons  = []
         self.theme = theme
         self.color_list = diffuser(self.theme[0],self.theme[1])
+        self.color_limit = color_limit
+        self.speed = speed
+        self.size  = size
+        self.angular_velocity = angular_velocity
         for a in range(amount):
             c = (r.randint(0,1280),r.randint(0,720))
             dirr = (r.choice(self.direction),r.choice(self.direction))
-            temp = Polygon(sides=self.sides,coords = c,direction =dirr,color= self.color_list[r.randint(0,len(self.color_list)-1)] )
+            temp = Polygon(sides=self.sides,coords = c,direction =dirr,color= self.color_list[r.randint(0,len(self.color_list)-self.color_limit)],speed = self.speed ,size = self.size,angular_velocity=self.angular_velocity)
             self.polygons.append(temp)
         
     def draw(self,screen):
@@ -114,7 +119,7 @@ class Text:
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
 class button:
-    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6):
+    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6,func = dummy):
         self.coords = coords
         self.x = coords[0]
         self.y = coords[1]
@@ -128,6 +133,7 @@ class button:
         self.text = textObj
         self.text.update_coords((self.pad_x,self.pad_y))
         self.shape = Polygon(sides,self.coords,self.Inactivecolor,self.size,speed=0)#button doesnt need to move xd
+        self.action = func
         #flags
         self.isClicked = False
         self.hover = False
@@ -144,6 +150,8 @@ class button:
         self.shape.rotate(screen)
         self.shape.draw(screen)
         self.text.draw(screen)
+        
+    
         
         
 

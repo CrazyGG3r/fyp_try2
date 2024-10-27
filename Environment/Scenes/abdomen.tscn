@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b57ssadvd2nqa"]
+[gd_scene load_steps=5 format=3 uid="uid://b57ssadvd2nqa"]
 
 [ext_resource type="Script" path="res://Scenes/abdomen.gd" id="1_asc4j"]
 
@@ -6,6 +6,8 @@
 size = Vector2(1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_lq70a"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_2m0oa"]
 
 [node name="abdomen" type="CharacterBody2D"]
 script = ExtResource("1_asc4j")
@@ -20,3 +22,9 @@ modulate = Color(0.858824, 0.858824, 0, 1)
 position = Vector2(2.38419e-07, -2.38419e-07)
 scale = Vector2(48, 48)
 mesh = SubResource("QuadMesh_lq70a")
+
+[node name="face" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -12)
+scale = Vector2(8, 24)
+mesh = SubResource("QuadMesh_2m0oa")

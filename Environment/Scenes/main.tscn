@@ -21,7 +21,7 @@ position = Vector2(1272, 352)
 position = Vector2(640, 712)
 
 [node name="abdomen" parent="." instance=ExtResource("1_ccva3")]
-position = Vector2(600, 360)
+position = Vector2(448, 328)
 
 [node name="Goal_left" parent="." instance=ExtResource("5_auabh")]
 position = Vector2(64, 352)
