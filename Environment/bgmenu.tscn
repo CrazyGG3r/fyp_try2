@@ -1,0 +1,146 @@
+[gd_scene load_steps=10 format=3 uid="uid://glkuyeylohlh"]
+
+[ext_resource type="Script" path="res://bgmenu.gd" id="1_jpl2u"]
+[ext_resource type="Script" path="res://bgcolor.gd" id="2_pppxw"]
+[ext_resource type="Texture2D" uid="uid://bfulr0shpqlst" path="res://Assets/Img/Parallax/L2_bg.png" id="2_qjdpy"]
+[ext_resource type="Texture2D" uid="uid://dvgme0byqbsfi" path="res://Assets/Img/Parallax/L_style7.png" id="4_8gufn"]
+[ext_resource type="Texture2D" uid="uid://bjjmdpnx404i4" path="res://Assets/Img/Parallax/L_style2.png" id="4_ojcxb"]
+[ext_resource type="Texture2D" uid="uid://d23efiesy3dad" path="res://Assets/Img/Parallax/L_style3.png" id="5_t6qg3"]
+[ext_resource type="Texture2D" uid="uid://bwjy1ueojsi0s" path="res://Assets/Img/Parallax/L_style5.png" id="6_8g6r1"]
+[ext_resource type="Texture2D" uid="uid://cersb570goxw0" path="res://Assets/Img/Parallax/L_style6.png" id="8_negvh"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_upkov"]
+size = Vector2(1280, 720)
+
+[node name="bg" type="ParallaxBackground"]
+script = ExtResource("1_jpl2u")
+
+[node name="bgcolor" type="MeshInstance2D" parent="."]
+position = Vector2(640, 360)
+mesh = SubResource("QuadMesh_upkov")
+script = ExtResource("2_pppxw")
+metadata/_edit_lock_ = true
+
+[node name="L1" type="ParallaxLayer" parent="."]
+position = Vector2(400, -296)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L1"]
+modulate = Color(0.219608, 0.219608, 0.219608, 1)
+position = Vector2(-440, 632)
+scale = Vector2(0.99161, 0.883613)
+texture = ExtResource("4_ojcxb")
+
+[node name="L7" type="ParallaxLayer" parent="."]
+position = Vector2(-240, -432)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L7"]
+modulate = Color(0.482353, 0.482353, 0.482353, 1)
+position = Vector2(952, 752)
+texture = ExtResource("4_8gufn")
+
+[node name="L2" type="ParallaxLayer" parent="."]
+position = Vector2(-784, -200)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L2"]
+modulate = Color(0.0823529, 0.117647, 0, 1)
+position = Vector2(1536, 504)
+texture = ExtResource("5_t6qg3")
+
+[node name="L8" type="ParallaxLayer" parent="."]
+position = Vector2(-1208, -232)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L8"]
+modulate = Color(0.321569, 0.419608, 0, 1)
+position = Vector2(944, 656)
+texture = ExtResource("4_ojcxb")
+
+[node name="L3" type="ParallaxLayer" parent="."]
+position = Vector2(-1584, -56)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L3"]
+modulate = Color(0.47451, 0.611765, 0, 1)
+position = Vector2(1944, 416)
+scale = Vector2(1.09306, 1.26377)
+texture = ExtResource("8_negvh")
+
+[node name="L9" type="ParallaxLayer" parent="."]
+position = Vector2(-912, -112)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L9"]
+modulate = Color(0.384314, 0.501961, 0, 1)
+position = Vector2(888, 592)
+texture = ExtResource("4_ojcxb")
+
+[node name="L4" type="ParallaxLayer" parent="."]
+position = Vector2(-1064, -80)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L4"]
+modulate = Color(0.717647, 0.603922, 0.341176, 1)
+position = Vector2(960, 688)
+texture = ExtResource("2_qjdpy")
+
+[node name="L10" type="ParallaxLayer" parent="."]
+position = Vector2(-1656, -160)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L10"]
+modulate = Color(0.772549, 0.584314, 0.152941, 1)
+position = Vector2(696, 544)
+scale = Vector2(1.00195, 1.20975)
+texture = ExtResource("6_8g6r1")
+
+[node name="L5" type="ParallaxLayer" parent="."]
+position = Vector2(-320, -104)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L5"]
+modulate = Color(0.721569, 0, 0.14902, 1)
+position = Vector2(1024, 776)
+scale = Vector2(1.17715, 1.35056)
+texture = ExtResource("2_qjdpy")
+
+[node name="L11" type="ParallaxLayer" parent="."]
+position = Vector2(-216, -144)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L11"]
+modulate = Color(0.537255, 0, 0.101961, 1)
+position = Vector2(944, 656)
+texture = ExtResource("4_ojcxb")
+
+[node name="L6" type="ParallaxLayer" parent="."]
+position = Vector2(-352, 64)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L6"]
+modulate = Color(0.203922, 0.00784314, 0.670588, 1)
+position = Vector2(960, 600)
+texture = ExtResource("2_qjdpy")
+
+[node name="L12" type="ParallaxLayer" parent="."]
+position = Vector2(-968, 88)
+motion_mirroring = Vector2(1920, 0)
+metadata/_edit_group_ = true
+
+[node name="L2Bg" type="Sprite2D" parent="L12"]
+modulate = Color(0.45098, 0.45098, 1, 1)
+position = Vector2(368, 528)
+texture = ExtResource("4_ojcxb")

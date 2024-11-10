@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://choiyg017m78x"]
+[gd_scene load_steps=4 format=3 uid="uid://choiyg017m78x"]
 
 [ext_resource type="PackedScene" uid="uid://glkuyeylohlh" path="res://bgmenu.tscn" id="1_m61a6"]
 [ext_resource type="FontFile" uid="uid://bw5nrojerqo51" path="res://Assets/Fonts/f2_Pixelmax-Regular.otf" id="2_wac4n"]
 [ext_resource type="FontFile" uid="uid://c57nj1pbkaw0q" path="res://Assets/Fonts/f3_PIXEL-LI.TTF" id="3_xlsmf"]
-[ext_resource type="Script" path="res://Exit.gd" id="5_j1i7w"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -13,9 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="bg" parent="." instance=ExtResource("1_m61a6")]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
 
-[node name="background" type="Node2D" parent="."]
+[node name="bgmenu" parent="." instance=ExtResource("1_m61a6")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -25,7 +25,6 @@ offset_top = 72.0
 offset_right = 960.0
 offset_bottom = 181.0
 pivot_offset = Vector2(174, 25)
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/normal_font = ExtResource("2_wac4n")
 theme_override_font_sizes/normal_font_size = 103
 text = "COLOSSEUM"
@@ -42,7 +41,6 @@ metadata/_edit_group_ = true
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Start
@@ -50,32 +48,27 @@ text = "Start
 
 [node name="Test Connections" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Test Setup"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Settings"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Credits"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Exit
 "
-script = ExtResource("5_j1i7w")
 
-[connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer/Exit" method="_on_pressed"]
+[editable path="bgmenu"]

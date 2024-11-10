@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://choiyg017m78x"]
+[gd_scene load_steps=7 format=3 uid="uid://choiyg017m78x"]
 
+[ext_resource type="Script" path="res://menubg.gd" id="1_6mkjf"]
 [ext_resource type="PackedScene" uid="uid://glkuyeylohlh" path="res://bgmenu.tscn" id="1_m61a6"]
 [ext_resource type="FontFile" uid="uid://bw5nrojerqo51" path="res://Assets/Fonts/f2_Pixelmax-Regular.otf" id="2_wac4n"]
 [ext_resource type="FontFile" uid="uid://c57nj1pbkaw0q" path="res://Assets/Fonts/f3_PIXEL-LI.TTF" id="3_xlsmf"]
 [ext_resource type="Script" path="res://Exit.gd" id="5_j1i7w"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_0d18f"]
+size = Vector2(1280, 720)
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -14,8 +18,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="bg" parent="." instance=ExtResource("1_m61a6")]
+master_scale = null
+master_opacity = null
+spacing = null
+speed = null
 
 [node name="background" type="Node2D" parent="."]
+
+[node name="menubg" type="MeshInstance2D" parent="background"]
+visible = false
+modulate = Color(0.372549, 0.12549, 0.0156863, 1)
+show_behind_parent = true
+z_index = -13
+z_as_relative = false
+position = Vector2(640, 360)
+mesh = SubResource("QuadMesh_0d18f")
+script = ExtResource("1_6mkjf")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -25,7 +43,6 @@ offset_top = 72.0
 offset_right = 960.0
 offset_bottom = 181.0
 pivot_offset = Vector2(174, 25)
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/normal_font = ExtResource("2_wac4n")
 theme_override_font_sizes/normal_font_size = 103
 text = "COLOSSEUM"
@@ -42,7 +59,6 @@ metadata/_edit_group_ = true
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Start
@@ -50,28 +66,24 @@ text = "Start
 
 [node name="Test Connections" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Test Setup"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Settings"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Credits"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/font = ExtResource("3_xlsmf")
 theme_override_font_sizes/font_size = 62
 text = "Exit
