@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://choiyg017m78x"]
+[gd_scene load_steps=4 format=3 uid="uid://choiyg017m78x"]
+
+[ext_resource type="Script" path="res://menubg.gd" id="1_6mkjf"]
+[ext_resource type="FontFile" uid="uid://b7pv26mtipbr2" path="res://Assets/Fonts/f1_colossusjag.ttf" id="1_jsbsq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_p3k3f"]
+size = Vector2(1280, 720)
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -8,10 +14,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="The Environment" type="Button" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="menubg" type="MeshInstance2D" parent="Node2D"]
+modulate = Color(0.372549, 0.12549, 0.0156863, 1)
+position = Vector2(640, 360)
+mesh = SubResource("QuadMesh_p3k3f")
+script = ExtResource("1_6mkjf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 2
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 896.0
+offset_bottom = 161.0
+pivot_offset = Vector2(174, 25)
+theme_override_fonts/normal_font = ExtResource("1_jsbsq")
+theme_override_font_sizes/normal_font_size = 103
+text = "Colosseum"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 24.0
-offset_right = 248.0
-offset_bottom = 32.0
-text = "The Environment"
+offset_left = 528.0
+offset_top = 192.0
+offset_right = 752.0
+offset_bottom = 464.0
+pivot_offset = Vector2(112, 0)
+metadata/_edit_group_ = true
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jsbsq")
+theme_override_font_sizes/font_size = 45
+text = "Start
+"
+
+[node name="Test Connections" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jsbsq")
+theme_override_font_sizes/font_size = 45
+text = "Test Setup"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jsbsq")
+theme_override_font_sizes/font_size = 45
+text = "Settings"
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jsbsq")
+theme_override_font_sizes/font_size = 45
+text = "Credits"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jsbsq")
+theme_override_font_sizes/font_size = 45
+text = "Exit
+"
