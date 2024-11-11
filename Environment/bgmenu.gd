@@ -35,7 +35,7 @@ func _ready():
 		Layerr.motion_scale.x = master_scale * factor * float(n)
 		Layerr.motion_scale.y = master_scale * factor * float(n)
 		#Layerr_sprite.modulate.a = master_opacity * factor * float(n+1.0)
-		Layerr_sprite.modulate = bg_.colors[n]
+		Layerr_sprite.modulate = bg_.colors[n+1]
 		
 		
 		

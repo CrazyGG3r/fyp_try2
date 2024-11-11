@@ -15,7 +15,7 @@ func _ready():
 	var color_A = Color_Dark
 	#var color_B = Color(10/255.0, 10/255.0, 10/255.0)
 # Number of steps
-	var steps = 12
+	var steps = 13
 	
 	for i in range(steps):
 		var t = i / float(steps - 1)  # Interpolation factor (from 0 to 1)
