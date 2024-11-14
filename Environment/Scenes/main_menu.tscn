@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2a8j270obwls"]
+
+[ext_resource type="PackedScene" uid="uid://bwia7rdevtamy" path="res://Scenes/bgmenu.tscn" id="1_8ctpd"]
+[ext_resource type="FontFile" uid="uid://bw5nrojerqo51" path="res://Assets/Fonts/f2_Pixelmax-Regular.otf" id="2_ga8v5"]
+[ext_resource type="FontFile" uid="uid://c57nj1pbkaw0q" path="res://Assets/Fonts/f3_PIXEL-LI.TTF" id="3_y1xkj"]
+[ext_resource type="Script" path="res://Scripts/Host.gd" id="4_7m2gk"]
+[ext_resource type="Script" path="res://Scripts/Exit.gd" id="5_xxru5"]
+
+[sub_resource type="Theme" id="Theme_3ir4v"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jitxi"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg" parent="." instance=ExtResource("1_8ctpd")]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.42, 0.43, 1)
+clip_contents = false
+layout_mode = 2
+offset_left = 404.0
+offset_top = 64.0
+offset_right = 876.0
+offset_bottom = 144.0
+pivot_offset = Vector2(236, 25)
+theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
+theme_override_fonts/normal_font = ExtResource("2_ga8v5")
+theme_override_font_sizes/normal_font_size = 76
+text = "COLOSSEUM"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 152.0
+offset_right = 728.0
+offset_bottom = 418.0
+metadata/_edit_group_ = true
+
+[node name="Host" type="Button" parent="VBoxContainer"]
+modulate = Color(0.847059, 0.690196, 0.690196, 1)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_3ir4v")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("3_y1xkj")
+theme_override_font_sizes/font_size = 41
+text = "Host
+"
+flat = true
+script = ExtResource("4_7m2gk")
+
+[node name="Test Connections" type="Button" parent="VBoxContainer"]
+modulate = Color(0.847059, 0.690196, 0.690196, 1)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("3_y1xkj")
+theme_override_font_sizes/font_size = 41
+text = "Test "
+icon = SubResource("PlaceholderTexture2D_jitxi")
+flat = true
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+modulate = Color(0.847059, 0.690196, 0.690196, 1)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("3_y1xkj")
+theme_override_font_sizes/font_size = 41
+text = "Settings"
+icon = SubResource("PlaceholderTexture2D_jitxi")
+flat = true
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+modulate = Color(0.847059, 0.690196, 0.690196, 1)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("3_y1xkj")
+theme_override_font_sizes/font_size = 41
+text = "Credits"
+icon = SubResource("PlaceholderTexture2D_jitxi")
+flat = true
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+modulate = Color(0.847059, 0.690196, 0.690196, 1)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("3_y1xkj")
+theme_override_font_sizes/font_size = 41
+text = "Exit
+"
+icon = SubResource("PlaceholderTexture2D_jitxi")
+flat = true
+script = ExtResource("5_xxru5")
+
+[connection signal="pressed" from="VBoxContainer/Host" to="VBoxContainer/Host" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer/Exit" method="_on_pressed"]

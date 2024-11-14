@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://glkuyeylohlh"]
+[gd_scene load_steps=10 format=3 uid="uid://bwia7rdevtamy"]
 
-[ext_resource type="Script" path="res://bgmenu.gd" id="1_jpl2u"]
-[ext_resource type="Script" path="res://bgcolor.gd" id="2_pppxw"]
+[ext_resource type="Script" path="res://Scripts/bgmenu.gd" id="1_cyqvb"]
 [ext_resource type="Texture2D" uid="uid://bfulr0shpqlst" path="res://Assets/Img/Parallax/L2_bg.png" id="2_qjdpy"]
+[ext_resource type="Script" path="res://Scripts/bgcolor.gd" id="2_wvxkc"]
 [ext_resource type="Texture2D" uid="uid://dvgme0byqbsfi" path="res://Assets/Img/Parallax/L_style7.png" id="4_8gufn"]
 [ext_resource type="Texture2D" uid="uid://bjjmdpnx404i4" path="res://Assets/Img/Parallax/L_style2.png" id="4_ojcxb"]
 [ext_resource type="Texture2D" uid="uid://d23efiesy3dad" path="res://Assets/Img/Parallax/L_style3.png" id="5_t6qg3"]
@@ -13,14 +13,14 @@
 size = Vector2(1280, 720)
 
 [node name="bg" type="ParallaxBackground"]
-script = ExtResource("1_jpl2u")
+script = ExtResource("1_cyqvb")
 
 [node name="bgcolor" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(640, 360)
 scale = Vector2(2.04926, 2.04926)
 mesh = SubResource("QuadMesh_upkov")
-script = ExtResource("2_pppxw")
+script = ExtResource("2_wvxkc")
 
 [node name="L1" type="ParallaxLayer" parent="."]
 position = Vector2(312, -328)

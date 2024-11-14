@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bofykc4ulteqy"]
+
+[ext_resource type="Script" path="res://Scripts/Hexapod_1.gd" id="1_e651a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjdfl"]
+size = Vector2(0.666667, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_csdqn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_s25v0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_43f4u"]
+
+[node name="CharacterBody2D" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_e651a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.43051e-06, 0)
+scale = Vector2(96, 96)
+shape = SubResource("RectangleShape2D_fjdfl")
+
+[node name="Style" type="Node2D" parent="."]
+
+[node name="body" type="MeshInstance2D" parent="Style"]
+modulate = Color(0.309804, 0.0705882, 0.498039, 1)
+scale = Vector2(64, 96)
+mesh = SubResource("QuadMesh_csdqn")
+
+[node name="Eye_right" type="MeshInstance2D" parent="Style"]
+position = Vector2(16, -40)
+scale = Vector2(16.5181, 16.5)
+mesh = SubResource("SphereMesh_s25v0")
+
+[node name="Pupil" type="MeshInstance2D" parent="Style/Eye_right"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")
+
+[node name="Eye_left" type="MeshInstance2D" parent="Style"]
+position = Vector2(-16, -40)
+scale = Vector2(16.5181, 16.5)
+mesh = SubResource("SphereMesh_s25v0")
+
+[node name="Pupil" type="MeshInstance2D" parent="Style/Eye_left"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")

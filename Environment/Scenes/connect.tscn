@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnj1yscq2gknu"]
+
+[ext_resource type="Script" path="res://Scripts/connect.gd" id="1_tmgkc"]
+[ext_resource type="FontFile" uid="uid://b7pv26mtipbr2" path="res://Assets/Fonts/f1_colossusjag.ttf" id="2_480jd"]
+[ext_resource type="Script" path="res://Scripts/Back Button.gd" id="3_04xcu"]
+[ext_resource type="FontFile" uid="uid://s1q1gcepw5wl" path="res://Assets/Fonts/f4_Stoneyard.ttf" id="4_t0bcc"]
+[ext_resource type="Script" path="res://Scripts/Port_Input.gd" id="5_86ju7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_tua3m"]
+size = Vector2(1920, 1080)
+
+[node name="Connect Screenm" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tmgkc")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.19, 0, 0, 1)
+position = Vector2(632, 496)
+mesh = SubResource("QuadMesh_tua3m")
+
+[node name="Back Button" type="Button" parent="."]
+modulate = Color(0.4, 0.21, 0.21, 1)
+layout_mode = 2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 136.0
+offset_bottom = 69.0
+theme_override_fonts/font = ExtResource("2_480jd")
+theme_override_font_sizes/font_size = 47
+text = "Back"
+script = ExtResource("3_04xcu")
+
+[node name="Fields" type="VBoxContainer" parent="."]
+modulate = Color(0.788235, 0.505882, 0.501961, 1)
+layout_mode = 0
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 840.0
+offset_bottom = 243.0
+
+[node name="Name" type="HBoxContainer" parent="Fields"]
+layout_mode = 2
+
+[node name="Name_Label" type="RichTextLabel" parent="Fields/Name"]
+layout_mode = 2
+size_flags_horizontal = 15
+theme_override_fonts/normal_font = ExtResource("4_t0bcc")
+theme_override_font_sizes/normal_font_size = 29
+text = "		 Env. Name:"
+fit_content = true
+autowrap_mode = 2
+
+[node name="Name_Input" type="LineEdit" parent="Fields/Name"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 15
+theme_override_fonts/font = ExtResource("4_t0bcc")
+theme_override_font_sizes/font_size = 30
+text = "The colosseum"
+placeholder_text = "Hello"
+
+[node name="IP" type="HBoxContainer" parent="Fields"]
+layout_mode = 2
+
+[node name="IP_Label" type="RichTextLabel" parent="Fields/IP"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_t0bcc")
+theme_override_font_sizes/normal_font_size = 29
+text = "	    IP Address:
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="IP_Input" type="LineEdit" parent="Fields/IP"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 15
+theme_override_fonts/font = ExtResource("4_t0bcc")
+theme_override_font_sizes/font_size = 30
+text = "127.0.0.1"
+placeholder_text = "127.0.0.1"
+max_length = 15
+expand_to_text_length = true
+
+[node name="Port" type="HBoxContainer" parent="Fields"]
+layout_mode = 2
+
+[node name="Port_Label" type="RichTextLabel" parent="Fields/Port"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_t0bcc")
+theme_override_font_sizes/normal_font_size = 29
+text = "	Port:"
+fit_content = true
+autowrap_mode = 0
+tab_size = 12
+
+[node name="Port_Input" type="LineEdit" parent="Fields/Port"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 15
+theme_override_fonts/font = ExtResource("4_t0bcc")
+theme_override_font_sizes/font_size = 30
+text = "9999"
+placeholder_text = "0-65537"
+script = ExtResource("5_86ju7")
+
+[node name="start_env" type="Button" parent="Fields"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_480jd")
+theme_override_font_sizes/font_size = 47
+text = "Start the environment"
+
+[connection signal="pressed" from="Back Button" to="Back Button" method="_on_pressed"]
+[connection signal="text_changed" from="Fields/Port/Port_Input" to="Fields/Port/Port_Input" method="_on_text_changed"]
+[connection signal="pressed" from="Fields/start_env" to="." method="_on_start_env_pressed"]

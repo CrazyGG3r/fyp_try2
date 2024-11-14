@@ -1,0 +1,179 @@
+[gd_scene load_steps=6 format=3 uid="uid://byoqfilosh0qw"]
+
+[ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
+[ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
+[ext_resource type="Script" path="res://Scenes/STOP_env.gd" id="2_i20hj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc4rd"]
+size = Vector2(1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_u8v81"]
+
+[node name="Environment" type="Node2D"]
+script = ExtResource("1_l84up")
+
+[node name="Training Stats" type="VBoxContainer" parent="."]
+z_index = 1
+offset_right = 376.0
+offset_bottom = 180.0
+
+[node name="Label" type="RichTextLabel" parent="Training Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Training Stats
+"
+fit_content = true
+scroll_active = false
+
+[node name="Episode" type="HBoxContainer" parent="Training Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Training Stats/Episode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Episode		:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Training Stats/Episode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+
+[node name="Score" type="HBoxContainer" parent="Training Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Training Stats/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Score			:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Training Stats/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+
+[node name="GameNo" type="HBoxContainer" parent="Training Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Training Stats/GameNo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Game No	:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Training Stats/GameNo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+
+[node name="STOP" type="Button" parent="."]
+offset_left = 1232.0
+offset_right = 1281.0
+offset_bottom = 31.0
+text = "STOP"
+script = ExtResource("2_i20hj")
+
+[node name="Environment_name" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Objects" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="W_top" type="RigidBody2D" parent="Objects"]
+position = Vector2(8, -128)
+rotation = -0.000475391
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="border" type="CollisionShape2D" parent="Objects/W_top"]
+position = Vector2(640, 192)
+scale = Vector2(1190, 10)
+shape = SubResource("RectangleShape2D_mc4rd")
+
+[node name="mesh" type="MeshInstance2D" parent="Objects/W_top"]
+modulate = Color(0.19, 0, 0, 1)
+position = Vector2(640, 192)
+scale = Vector2(1190, 10)
+mesh = SubResource("QuadMesh_u8v81")
+
+[node name="W_bot" type="RigidBody2D" parent="Objects"]
+position = Vector2(8, 496)
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="border" type="CollisionShape2D" parent="Objects/W_bot"]
+position = Vector2(640, 192)
+scale = Vector2(1190, 10)
+shape = SubResource("RectangleShape2D_mc4rd")
+
+[node name="mesh" type="MeshInstance2D" parent="Objects/W_bot"]
+modulate = Color(0.19, 0, 0, 1)
+position = Vector2(640, 192)
+scale = Vector2(1190, 10)
+mesh = SubResource("QuadMesh_u8v81")
+
+[node name="W_left" type="RigidBody2D" parent="Objects"]
+position = Vector2(248, -264)
+rotation = 1.5708
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="border" type="CollisionShape2D" parent="Objects/W_left"]
+position = Vector2(640, 192)
+rotation = 0.000157926
+scale = Vector2(635, 10)
+shape = SubResource("RectangleShape2D_mc4rd")
+
+[node name="mesh" type="MeshInstance2D" parent="Objects/W_left"]
+modulate = Color(0.19, 0, 0, 1)
+position = Vector2(640, 192)
+scale = Vector2(635, 10)
+mesh = SubResource("QuadMesh_u8v81")
+
+[node name="W_right" type="RigidBody2D" parent="Objects"]
+position = Vector2(1432, -264)
+rotation = 1.5708
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="border" type="CollisionShape2D" parent="Objects/W_right"]
+position = Vector2(640, 192)
+rotation = 0.000157926
+scale = Vector2(635, 10)
+shape = SubResource("RectangleShape2D_mc4rd")
+
+[node name="mesh" type="MeshInstance2D" parent="Objects/W_right"]
+modulate = Color(0.19, 0, 0, 1)
+position = Vector2(640, 192)
+scale = Vector2(635, 10)
+mesh = SubResource("QuadMesh_u8v81")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
+position = Vector2(248, 312)
+
+[connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
