@@ -119,14 +119,14 @@ class Text:
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
 class button:
-    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6,func = dummy,val = None):
+    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6,func = dummy,val = None,offsetx = 1.3,offsety = 4):
         self.coords = coords
         self.x = coords[0]
         self.y = coords[1]
         self.width = size - 10
         self.height = size - 10
-        self.pad_x = self.x - (size/1.3)
-        self.pad_y = self.y - (size/4)
+        self.pad_x = self.x - (size/offsetx)
+        self.pad_y = self.y - (size/offsety)
         self.size = size
         self.Inactivecolor = colorInactive
         self.Activecolor = colorActive

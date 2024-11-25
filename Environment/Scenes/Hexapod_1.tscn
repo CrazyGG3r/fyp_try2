@@ -23,7 +23,7 @@ shape = SubResource("RectangleShape2D_fjdfl")
 [node name="Style" type="Node2D" parent="."]
 
 [node name="body" type="MeshInstance2D" parent="Style"]
-modulate = Color(0.309804, 0.0705882, 0.498039, 1)
+modulate = Color(0.968627, 0.392157, 0.415686, 1)
 scale = Vector2(64, 96)
 mesh = SubResource("QuadMesh_csdqn")
 

@@ -2,7 +2,7 @@ import pygame
 pygame.init()
 from effects import * 
 import socket
-
+import random 
 
 client_socket = None
 
@@ -55,12 +55,21 @@ def environment(screen,bg = None):
     text_mov_down   = Text((0,0),25,(200,28,10),"DOWN ")
     text_mov_left   = Text((0,0),25,(200,28,10),"LEFT ")
     text_mov_right  = Text((0,0),25,(200,28,10),"RIGHT")
-    button_up       = button((screen.get_width()*1/6,300),75,c2,c1,text_mov_up   ,3,send_Action,"UP") 
-    button_down     = button((screen.get_width()*2/6,300),75,c2,c1,text_mov_down ,3,send_Action,"DN")
-    button_left     = button((screen.get_width()*3/6,300),75,c2,c1,text_mov_left ,3,send_Action,"LT")
-    button_right    = button((screen.get_width()*4/6,300),75,c2,c1,text_mov_right,3,send_Action,"RT")
-    all_butts = [button1,button2,button_up,button_right,button_down,button_left]
+    text_rot_right  = Text((0,0),25,(200,28,10),"20 DEG >") 
+    text_rot_left   = Text((0,0),25,(200,28,10),"20 DEG <")
+    text_random_but  = Text((0,0),25,(200,28,10),"Random")
+    button_up       = button((screen.get_width()*1/8,300),75,c2,c1,text_mov_up   ,4,send_Action,"FK",2) 
+    button_down     = button((screen.get_width()*2/8,300),75,c2,c1,text_mov_down ,4,send_Action,"BK",2)
+    button_left     = button((screen.get_width()*3/8,300),75,c2,c1,text_mov_left ,4,send_Action,"LT",2)
+    button_right    = button((screen.get_width()*4/8,300),75,c2,c1,text_mov_right,4,send_Action,"RT",2)
+    button_rt_right = button((screen.get_width()*5/8,300),75,c2,c1,text_rot_right,4,send_Action,"R2",2)  
+    button_rt_left  = button((screen.get_width()*6/8,300),75,c2,c1,text_rot_left ,4,send_Action,"L2",2)  
+    button_random  = button((screen.get_width()*1/8,500),80,c2,c1,text_random_but ,4,send_Action,"RA",2)  
+    all_butts = [button1,button2,button_up,button_right,button_down,button_left,button_rt_left,button_rt_right,button_random]
+    command_butts = [button_up,button_right,button_down,button_left,button_rt_left,button_rt_right]
     running = True
+    
+    flag_rand = 0
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
@@ -92,9 +101,16 @@ def environment(screen,bg = None):
                     a.shape.flag = 0
             else:
                 a.hover = False
+        if flag_rand == 1 and client_socket:
+            temp = random.choice(command_butts)
+            temp.action(temp.value)
         for a in clicked_buttons:
             a.isClicked = False
             if a.text.text != "Connect" or a.text.text!= "Disconnect":
+                if a.value == "RA" and flag_rand == 0:
+                    flag_rand = 1
+                else:
+                    flag_rand = 0 
                 a.action(a.value)
             else:
                 a.action(screen,bg)

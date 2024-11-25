@@ -2,6 +2,7 @@ extends Node2D
 
 var server = TCPServer.new()
 var client_DQN = server.take_connection()
+signal handel_action(action_str)
 
 func _ready():
 	print("IP Address:", Global.ip_address)
@@ -27,14 +28,15 @@ func _process(delta):
 		if typeof(data) == TYPE_ARRAY and data.size() == 2:
 			var byte_array = PackedByteArray(data[1])  # Extract the byte data
 			var action_str = byte_array.get_string_from_utf8() # Convert to string
-			print("Received action:", action_str)
-			handle_action(action_str)
+			handel_action.emit(action_str)
+			#print("Received action:", action_str)
+			#handle_action(action_str)
 		#var te = action[1].get_string_from_utf8()
-		
 		#print("Received action:", action)
 		#handle_action(action)
 
-func handle_action(action):
-	# Handle the received action
-	print("Handling action:", action[1])
+
+#func handle_action(action):
+	## Handle the received action
+	#print("Handling action:", action)
 

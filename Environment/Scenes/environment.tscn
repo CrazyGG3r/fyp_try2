@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://byoqfilosh0qw"]
+[gd_scene load_steps=7 format=3 uid="uid://byoqfilosh0qw"]
 
 [ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
 [ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
@@ -8,6 +8,8 @@
 size = Vector2(1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_u8v81"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_45f5d"]
 
 [node name="Environment" type="Node2D"]
 script = ExtResource("1_l84up")
@@ -101,6 +103,9 @@ script = ExtResource("2_i20hj")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
+position = Vector2(288, 368)
+
 [node name="Objects" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 
@@ -108,7 +113,6 @@ metadata/_edit_group_ = true
 position = Vector2(8, -128)
 rotation = -0.000475391
 gravity_scale = 0.0
-metadata/_edit_group_ = true
 
 [node name="border" type="CollisionShape2D" parent="Objects/W_top"]
 position = Vector2(640, 192)
@@ -116,7 +120,7 @@ scale = Vector2(1190, 10)
 shape = SubResource("RectangleShape2D_mc4rd")
 
 [node name="mesh" type="MeshInstance2D" parent="Objects/W_top"]
-modulate = Color(0.19, 0, 0, 1)
+modulate = Color(0.305882, 0, 0, 1)
 position = Vector2(640, 192)
 scale = Vector2(1190, 10)
 mesh = SubResource("QuadMesh_u8v81")
@@ -124,7 +128,6 @@ mesh = SubResource("QuadMesh_u8v81")
 [node name="W_bot" type="RigidBody2D" parent="Objects"]
 position = Vector2(8, 496)
 gravity_scale = 0.0
-metadata/_edit_group_ = true
 
 [node name="border" type="CollisionShape2D" parent="Objects/W_bot"]
 position = Vector2(640, 192)
@@ -132,7 +135,7 @@ scale = Vector2(1190, 10)
 shape = SubResource("RectangleShape2D_mc4rd")
 
 [node name="mesh" type="MeshInstance2D" parent="Objects/W_bot"]
-modulate = Color(0.19, 0, 0, 1)
+modulate = Color(0.305882, 0, 0, 1)
 position = Vector2(640, 192)
 scale = Vector2(1190, 10)
 mesh = SubResource("QuadMesh_u8v81")
@@ -141,7 +144,6 @@ mesh = SubResource("QuadMesh_u8v81")
 position = Vector2(248, -264)
 rotation = 1.5708
 gravity_scale = 0.0
-metadata/_edit_group_ = true
 
 [node name="border" type="CollisionShape2D" parent="Objects/W_left"]
 position = Vector2(640, 192)
@@ -150,7 +152,7 @@ scale = Vector2(635, 10)
 shape = SubResource("RectangleShape2D_mc4rd")
 
 [node name="mesh" type="MeshInstance2D" parent="Objects/W_left"]
-modulate = Color(0.19, 0, 0, 1)
+modulate = Color(0.305882, 0, 0, 1)
 position = Vector2(640, 192)
 scale = Vector2(635, 10)
 mesh = SubResource("QuadMesh_u8v81")
@@ -159,7 +161,6 @@ mesh = SubResource("QuadMesh_u8v81")
 position = Vector2(1432, -264)
 rotation = 1.5708
 gravity_scale = 0.0
-metadata/_edit_group_ = true
 
 [node name="border" type="CollisionShape2D" parent="Objects/W_right"]
 position = Vector2(640, 192)
@@ -168,12 +169,17 @@ scale = Vector2(635, 10)
 shape = SubResource("RectangleShape2D_mc4rd")
 
 [node name="mesh" type="MeshInstance2D" parent="Objects/W_right"]
-modulate = Color(0.19, 0, 0, 1)
+modulate = Color(0.305882, 0, 0, 1)
 position = Vector2(640, 192)
 scale = Vector2(635, 10)
 mesh = SubResource("QuadMesh_u8v81")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
-position = Vector2(288, 368)
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Objects"]
+modulate = Color(0.411765, 0.352941, 0.501961, 1)
+z_index = -14
+position = Vector2(640, 360)
+scale = Vector2(1280, 720)
+mesh = SubResource("QuadMesh_45f5d")
 
+[connection signal="handel_action" from="." to="CharacterBody2D" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
