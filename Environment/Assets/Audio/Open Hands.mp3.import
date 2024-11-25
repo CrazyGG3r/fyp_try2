@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c4p8rextoimh1"
+path="res://.godot/imported/Open Hands.mp3-260c7c5cb140d773e36cc6083d81bb10.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Open Hands.mp3"
+dest_files=["res://.godot/imported/Open Hands.mp3-260c7c5cb140d773e36cc6083d81bb10.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

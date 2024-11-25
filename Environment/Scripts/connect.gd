@@ -15,13 +15,17 @@ func _process(delta):
 @onready var port = $Fields/Port/Port_Input
 @onready var ip = $Fields/IP/IP_Input
 
-var server = WebSocketMultiplayerPeer.new()
+
 
 func _on_start_env_pressed():
 	var portt = int (port.text)
 	var ipp = str(ip.text)
 	var nameee = str(namee.text)
 	print(ipp,portt,nameee)
-	server.create_server(portt,ipp)
+	Global.ip_address = ipp
+	Global.port_number = portt
+	Global.room_name = nameee
+	
+	get_tree().change_scene_to_file("res://Scenes/environment.tscn")
 	
 	

@@ -2,10 +2,9 @@ extends RigidBody2D
 
 
 const SPEED = 300.0
-const angular_speed = deg_to_rad(60)
+const angular_speed = deg_to_rad(20)
 var movement = Vector2(0,0)
 func _physics_process(delta):
-
 	if Input.is_action_just_pressed("BACKWARDS"):
 		movement = Vector2(sin(rotation),cos(rotation)) * SPEED
 		position += movement * delta
