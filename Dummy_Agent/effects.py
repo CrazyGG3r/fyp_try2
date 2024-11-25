@@ -119,7 +119,7 @@ class Text:
     def changecolor(self, color):
         self.surface = self.font.render(self.text, True, color)
 class button:
-    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6,func = dummy):
+    def __init__(self, coords, size, colorInactive, colorActive, textObj,sides = 6,func = dummy,val = None):
         self.coords = coords
         self.x = coords[0]
         self.y = coords[1]
@@ -135,6 +135,7 @@ class button:
         self.shape = Polygon(sides,self.coords,self.Inactivecolor,self.size,speed=0)#button doesnt need to move xd
         self.action = func
         #flags
+        self.value = val
         self.isClicked = False
         self.hover = False
     def draw(self, screen):

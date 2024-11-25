@@ -1,7 +1,7 @@
 extends Node2D
 
 var server = TCPServer.new()
-var client_DQN = null
+var client_DQN = server.take_connection()
 
 func _ready():
 	print("IP Address:", Global.ip_address)
@@ -20,15 +20,21 @@ func _process(delta):
 		if client_DQN:
 			client_DQN.set_no_delay(true)
 			print("New client connected.")
-
+	
 	# Read data from the client if available
 	if client_DQN and client_DQN.get_available_bytes() > 0:
-		var action = client_DQN.get_data(client_DQN.get_available_bytes())
-		var action_str = String(action)  # Convert byte array to string
-		print("Received action:", action_str)
-		handle_action(action_str)
+		var data = client_DQN.get_data(2)	
+		if typeof(data) == TYPE_ARRAY and data.size() == 2:
+			var byte_array = PackedByteArray(data[1])  # Extract the byte data
+			var action_str = byte_array.get_string_from_utf8() # Convert to string
+			print("Received action:", action_str)
+			handle_action(action_str)
+		#var te = action[1].get_string_from_utf8()
+		
+		#print("Received action:", action)
+		#handle_action(action)
 
 func handle_action(action):
 	# Handle the received action
-	print("Handling action:", action)
+	print("Handling action:", action[1])
 

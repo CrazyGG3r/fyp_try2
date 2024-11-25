@@ -26,7 +26,7 @@ def send_Action(action= "Hello"):
     if client_socket:
         try:
             client_socket.sendall(action.encode('utf-8'))
-            print(f"Action sent: {action}")
+            print(f"Action sent:{action}")
         except Exception as e:
             print(f"Failed to send action: {e}")
     else:
@@ -55,10 +55,10 @@ def environment(screen,bg = None):
     text_mov_down   = Text((0,0),25,(200,28,10),"DOWN ")
     text_mov_left   = Text((0,0),25,(200,28,10),"LEFT ")
     text_mov_right  = Text((0,0),25,(200,28,10),"RIGHT")
-    button_up       = button((screen.get_width()*1/6,300),75,c2,c1,text_mov_up   ,3,send_Action) 
-    button_down     = button((screen.get_width()*2/6,300),75,c2,c1,text_mov_down ,3,send_Action)
-    button_left     = button((screen.get_width()*3/6,300),75,c2,c1,text_mov_left ,3,send_Action)
-    button_right    = button((screen.get_width()*4/6,300),75,c2,c1,text_mov_right,3,send_Action)
+    button_up       = button((screen.get_width()*1/6,300),75,c2,c1,text_mov_up   ,3,send_Action,"UP") 
+    button_down     = button((screen.get_width()*2/6,300),75,c2,c1,text_mov_down ,3,send_Action,"DN")
+    button_left     = button((screen.get_width()*3/6,300),75,c2,c1,text_mov_left ,3,send_Action,"LT")
+    button_right    = button((screen.get_width()*4/6,300),75,c2,c1,text_mov_right,3,send_Action,"RT")
     all_butts = [button1,button2,button_up,button_right,button_down,button_left]
     running = True
     while running:
@@ -95,7 +95,7 @@ def environment(screen,bg = None):
         for a in clicked_buttons:
             a.isClicked = False
             if a.text.text != "Connect" or a.text.text!= "Disconnect":
-                a.action(a.text.text)
+                a.action(a.value)
             else:
                 a.action(screen,bg)
         pygame.display.flip()
