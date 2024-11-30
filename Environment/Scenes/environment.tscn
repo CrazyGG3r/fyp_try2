@@ -158,7 +158,7 @@ mass = 1.0
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
 position = Vector2(632, 336)
 rotation = 1.5708
-scale = Vector2(1.655, 1.655)
+scale = Vector2(1.2, 1.2)
 motion_mode = 1
 
 [node name="ground" type="MeshInstance2D" parent="."]
@@ -169,4 +169,5 @@ scale = Vector2(1280, 720)
 mesh = SubResource("QuadMesh_45f5d")
 metadata/_edit_group_ = true
 
+[connection signal="handel_action" from="." to="CharacterBody2D" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
