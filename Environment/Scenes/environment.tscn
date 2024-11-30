@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://byoqfilosh0qw"]
+[gd_scene load_steps=10 format=3 uid="uid://byoqfilosh0qw"]
 
 [ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
 [ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
 [ext_resource type="Script" path="res://Scenes/STOP_env.gd" id="2_i20hj"]
+[ext_resource type="PackedScene" uid="uid://ddm2m44ueb3ox" path="res://Scenes/ball.tscn" id="4_p3vgk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc4rd"]
-size = Vector2(1, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw7co"]
+size = Vector2(1, 0.37338)
 
-[sub_resource type="QuadMesh" id="QuadMesh_u8v81"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gvkk"]
+size = Vector2(0.195176, 0.984365)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogj38"]
+size = Vector2(0.195176, 0.984365)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cnh35"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_45f5d"]
 
@@ -103,83 +110,63 @@ script = ExtResource("2_i20hj")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Boundary" type="Node2D" parent="."]
+position = Vector2(640, 424)
+scale = Vector2(942.739, 471.37)
+
+[node name="top" type="StaticBody2D" parent="Boundary"]
+
+[node name="coll" type="CollisionShape2D" parent="Boundary/top"]
+position = Vector2(0, -0.6619)
+shape = SubResource("RectangleShape2D_mw7co")
+
+[node name="bottom" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, 0.973757)
+
+[node name="coll" type="CollisionShape2D" parent="Boundary/bottom"]
+position = Vector2(0, -0.311857)
+shape = SubResource("RectangleShape2D_mw7co")
+
+[node name="right" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, 1.94751)
+
+[node name="coll" type="CollisionShape2D" parent="Boundary/right"]
+position = Vector2(0.577042, -1.94751)
+shape = SubResource("RectangleShape2D_4gvkk")
+
+[node name="left" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, 0.973757)
+
+[node name="coll" type="CollisionShape2D" parent="Boundary/left"]
+position = Vector2(-0.572799, -0.973757)
+shape = SubResource("RectangleShape2D_ogj38")
+
+[node name="wals" type="MeshInstance2D" parent="Boundary"]
+modulate = Color(0.301961, 0.00784314, 0.145098, 1)
+mesh = SubResource("BoxMesh_cnh35")
+
+[node name="wals2" type="MeshInstance2D" parent="Boundary"]
+modulate = Color(0, 0, 0, 1)
+rotation = 3.14159
+scale = Vector2(0.957046, 0.957046)
+mesh = SubResource("BoxMesh_cnh35")
+
+[node name="Ball" parent="." instance=ExtResource("4_p3vgk")]
+position = Vector2(840, 296)
+mass = 1.0
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
-position = Vector2(288, 368)
-
-[node name="Objects" type="Node2D" parent="."]
-metadata/_edit_group_ = true
-
-[node name="W_top" type="RigidBody2D" parent="Objects"]
-position = Vector2(8, -128)
-rotation = -0.000475391
-gravity_scale = 0.0
-
-[node name="border" type="CollisionShape2D" parent="Objects/W_top"]
-position = Vector2(640, 192)
-scale = Vector2(1190, 10)
-shape = SubResource("RectangleShape2D_mc4rd")
-
-[node name="mesh" type="MeshInstance2D" parent="Objects/W_top"]
-modulate = Color(0.305882, 0, 0, 1)
-position = Vector2(640, 192)
-scale = Vector2(1190, 10)
-mesh = SubResource("QuadMesh_u8v81")
-
-[node name="W_bot" type="RigidBody2D" parent="Objects"]
-position = Vector2(8, 496)
-gravity_scale = 0.0
-
-[node name="border" type="CollisionShape2D" parent="Objects/W_bot"]
-position = Vector2(640, 192)
-scale = Vector2(1190, 10)
-shape = SubResource("RectangleShape2D_mc4rd")
-
-[node name="mesh" type="MeshInstance2D" parent="Objects/W_bot"]
-modulate = Color(0.305882, 0, 0, 1)
-position = Vector2(640, 192)
-scale = Vector2(1190, 10)
-mesh = SubResource("QuadMesh_u8v81")
-
-[node name="W_left" type="RigidBody2D" parent="Objects"]
-position = Vector2(248, -264)
+position = Vector2(632, 336)
 rotation = 1.5708
-gravity_scale = 0.0
+scale = Vector2(1.655, 1.655)
+motion_mode = 1
 
-[node name="border" type="CollisionShape2D" parent="Objects/W_left"]
-position = Vector2(640, 192)
-rotation = 0.000157926
-scale = Vector2(635, 10)
-shape = SubResource("RectangleShape2D_mc4rd")
-
-[node name="mesh" type="MeshInstance2D" parent="Objects/W_left"]
-modulate = Color(0.305882, 0, 0, 1)
-position = Vector2(640, 192)
-scale = Vector2(635, 10)
-mesh = SubResource("QuadMesh_u8v81")
-
-[node name="W_right" type="RigidBody2D" parent="Objects"]
-position = Vector2(1432, -264)
-rotation = 1.5708
-gravity_scale = 0.0
-
-[node name="border" type="CollisionShape2D" parent="Objects/W_right"]
-position = Vector2(640, 192)
-rotation = 0.000157926
-scale = Vector2(635, 10)
-shape = SubResource("RectangleShape2D_mc4rd")
-
-[node name="mesh" type="MeshInstance2D" parent="Objects/W_right"]
-modulate = Color(0.305882, 0, 0, 1)
-position = Vector2(640, 192)
-scale = Vector2(635, 10)
-mesh = SubResource("QuadMesh_u8v81")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Objects"]
-modulate = Color(0.411765, 0.352941, 0.501961, 1)
+[node name="ground" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 z_index = -14
 position = Vector2(640, 360)
 scale = Vector2(1280, 720)
 mesh = SubResource("QuadMesh_45f5d")
+metadata/_edit_group_ = true
 
-[connection signal="handel_action" from="." to="CharacterBody2D" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
