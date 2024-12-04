@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://byoqfilosh0qw"]
+[gd_scene load_steps=11 format=3 uid="uid://byoqfilosh0qw"]
 
 [ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
 [ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
 [ext_resource type="Script" path="res://Scenes/STOP_env.gd" id="2_i20hj"]
-[ext_resource type="PackedScene" uid="uid://ddm2m44ueb3ox" path="res://Scenes/ball.tscn" id="4_p3vgk"]
+[ext_resource type="Script" path="res://Scripts/ball.gd" id="3_fjvfy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw7co"]
 size = Vector2(1, 0.37338)
@@ -15,6 +15,10 @@ size = Vector2(0.195176, 0.984365)
 size = Vector2(0.195176, 0.984365)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cnh35"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bvp2s"]
+friction = 0.8
+bounce = 0.5
 
 [sub_resource type="QuadMesh" id="QuadMesh_45f5d"]
 
@@ -151,14 +155,18 @@ rotation = 3.14159
 scale = Vector2(0.957046, 0.957046)
 mesh = SubResource("BoxMesh_cnh35")
 
-[node name="Ball" parent="." instance=ExtResource("4_p3vgk")]
+[node name="Ball" type="RigidBody2D" parent="."]
 position = Vector2(840, 296)
-mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_bvp2s")
+gravity_scale = 0.0
+linear_damp = 0.2
+angular_damp = 0.5
+script = ExtResource("3_fjvfy")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_0eu02")]
 position = Vector2(632, 336)
 rotation = 1.5708
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.655, 1.655)
 motion_mode = 1
 
 [node name="ground" type="MeshInstance2D" parent="."]
@@ -169,5 +177,4 @@ scale = Vector2(1280, 720)
 mesh = SubResource("QuadMesh_45f5d")
 metadata/_edit_group_ = true
 
-[connection signal="handel_action" from="." to="CharacterBody2D" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]

@@ -29,14 +29,5 @@ func _process(delta):
 			var byte_array = PackedByteArray(data[1])  # Extract the byte data
 			var action_str = byte_array.get_string_from_utf8() # Convert to string
 			handel_action.emit(action_str)
-			#print("Received action:", action_str)
-			#handle_action(action_str)
-		#var te = action[1].get_string_from_utf8()
-		#print("Received action:", action)
-		#handle_action(action)
 
-
-#func handle_action(action):
-	## Handle the received action
-	#print("Handling action:", action)
 
