@@ -181,5 +181,7 @@ metadata/_edit_group_ = true
 [node name="Butler" type="Node2D" parent="."]
 script = ExtResource("5_rgwml")
 
+[connection signal="connected" from="." to="Butler" method="_on_environment_connected"]
 [connection signal="handel_action" from="." to="hexapod" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
+[connection signal="send_state_vector" from="Butler" to="." method="_on_butler_send_state_vector"]

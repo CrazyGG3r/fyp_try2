@@ -1,8 +1,11 @@
+
 import pygame
 pygame.init()
 from effects import * 
 import socket
 import random 
+import ast
+import json
 
 client_socket = None
 
@@ -13,6 +16,9 @@ def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(server_address)
         print("Connected to the server.")
+        
+        
+
     except Exception as e:
         print(f"Connection failed: {e}")
         return None
@@ -32,6 +38,21 @@ def send_Action(action= "Hello"):
     else:
         print("No active connection to the server.")
 
+def receive_state(action = "None"):
+    if client_socket:
+        try:
+          data = client_socket.recv(1024)
+          if data:
+              decoded_state = data.decode("utf-8")
+              print("state: ",decoded_state)
+              json_decoded_data = json.loads(decoded_state)
+              parsed_data = [ast.literal_eval(item) for item in json_decoded_data]
+              print("sttta: ",parsed_data)
+              return parsed_data
+        except Exception as e:
+            print(f"Error receiving data: {e}")
+        
+state = None
 
 
 
@@ -114,6 +135,7 @@ def environment(screen,bg = None):
                 a.action(a.value)
             else:
                 a.action(screen,bg)
+        receive_state()
         pygame.display.flip()
     
    

@@ -3,7 +3,6 @@ extends Node2D
 var num_balls = 1
 var ball_scene = preload("res://Scenes/ball.tscn")  # Replace with the path to your ball scene
 var balls = []  # Array to store references to the balls
-
 func _ready():
 	generate_random_balls(num_balls)
 
@@ -17,5 +16,4 @@ func generate_random_balls(count: int):
 
 # Accessing the position of a specific ball
 func _process(delta):
-	if balls.size() > 0:
-		print("First ball position:", balls[0].position)  # Access the first ball
+	pass

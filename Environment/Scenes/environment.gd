@@ -3,7 +3,7 @@ extends Node2D
 var server = TCPServer.new()
 var client_DQN = server.take_connection()
 signal handel_action(action_str)
-
+signal connected()
 func _ready():
 	print("IP Address:", Global.ip_address)
 	print("Room Name:", Global.room_name)
@@ -21,6 +21,7 @@ func _process(delta):
 		if client_DQN:
 			client_DQN.set_no_delay(true)
 			print("New client connected.")
+			connected.emit()
 	
 	# Read data from the client if available
 	if client_DQN and client_DQN.get_available_bytes() > 0:
@@ -32,3 +33,17 @@ func _process(delta):
 			handel_action.emit(action_str)
 
 
+
+
+func _on_butler_send_state_vector(state_vector):
+	print("from env:",state_vector)
+	if client_DQN and client_DQN.get_status() ==2:
+		var serialized_data = JSON.stringify(state_vector)
+		print(serialized_data)
+		var byte_state = serialized_data.to_utf8_buffer()
+		client_DQN.put_data(byte_state)
+		
+		
+		
+		
+		
