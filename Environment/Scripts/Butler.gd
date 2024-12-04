@@ -37,6 +37,12 @@ func calculate_polar_coordinate(entity):
 	var theta = ball.balls[0].global_position.angle_to_point(entity.global_position)
 	return Vector2(r,theta)
 
-
+func calculate_y_distance(static_entity):
+	var d = ball.balls[0].global_position.y - static_entity.global_position.y
+	return d	
+func calculate_x_distance(static_entity):
+	var d = ball.balls[0].global_position.x - static_entity.global_position.x
+	return d	
+	
 func _on_environment_connected():
 	flag_connected = 1 # Replace with function body.
