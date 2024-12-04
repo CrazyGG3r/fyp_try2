@@ -28,6 +28,7 @@ func _process(delta):
 		if typeof(data) == TYPE_ARRAY and data.size() == 2:
 			var byte_array = PackedByteArray(data[1])  # Extract the byte data
 			var action_str = byte_array.get_string_from_utf8() # Convert to string
+			print(action_str)
 			handel_action.emit(action_str)
 
 

@@ -1,23 +1,21 @@
 extends Node2D
 
-# Set the number of balls you want to generate
-var num_balls = 10
+var num_balls = 1
 var ball_scene = preload("res://Scenes/ball.tscn")  # Replace with the path to your ball scene
+var balls = []  # Array to store references to the balls
 
 func _ready():
 	generate_random_balls(num_balls)
 
-# Function to generate random balls
 func generate_random_balls(count: int):
 	for i in range(count):
-		# Create an instance of the ball scene
 		var ball_instance = ball_scene.instantiate()
-		
-		# Set a random position within a defined range (you can adjust the range as needed)
-		var random_position = Vector2(randf_range(-200, 200), randf_range(-200, 200))  # Example range: -200 to 200
-		
-		# Set the ball's position
+		var random_position = Vector2(0,0)
 		ball_instance.position = random_position
-		
-		# Add the ball to the scene
 		add_child(ball_instance)
+		balls.append(ball_instance)  # Store reference in the array
+
+# Accessing the position of a specific ball
+func _process(delta):
+	if balls.size() > 0:
+		print("First ball position:", balls[0].position)  # Access the first ball

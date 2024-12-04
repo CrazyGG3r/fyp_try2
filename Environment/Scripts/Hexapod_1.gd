@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 350.0
-const angular_speed = deg_to_rad(20)
+const angular_speed = deg_to_rad(5)
 var movement = Vector2(0,0)
 
 var fake_delta = null
@@ -46,13 +46,13 @@ func _on_environment_handel_action(action_str):
 	if action_str == "BK":
 		movement = Vector2(sin(rotation),cos(rotation)) * SPEED
 		#position -= movement * fake_delta
-		move_and_collide(movement*fake_delta)
+		move_and_collide(-movement*fake_delta)
 	if action_str == "RT":
 		movement = Vector2( cos(rotation),sin(rotation)) * SPEED
 		#position += movement * fake_delta
 		move_and_collide(movement*fake_delta)
 	if action_str == "LT":
-		movement = Vector2( -cos(rotation),sin(rotation)) * SPEED
+		movement = Vector2( -cos(rotation),sin(rotation)) * -SPEED
 		#position += movement * fake_delta
 		move_and_collide(movement*fake_delta)
 	if action_str == "R2":
