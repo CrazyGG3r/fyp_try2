@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://byoqfilosh0qw"]
+[gd_scene load_steps=17 format=3 uid="uid://byoqfilosh0qw"]
 
 [ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
 [ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
 [ext_resource type="Script" path="res://Scenes/STOP_env.gd" id="2_i20hj"]
+[ext_resource type="Script" path="res://Scripts/goal_Label.gd" id="2_rilcx"]
+[ext_resource type="Script" path="res://Scripts/Goal_right.gd" id="3_7j6h6"]
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="3_fjvfy"]
 [ext_resource type="Script" path="res://Scripts/Butler.gd" id="5_rgwml"]
 
@@ -21,9 +23,15 @@ size = Vector2(0.195176, 0.984365)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogj38"]
 size = Vector2(0.195176, 0.984365)
 
+[sub_resource type="QuadMesh" id="QuadMesh_x6inh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0log"]
+size = Vector2(128, 176)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bvp2s"]
-friction = 0.8
-bounce = 0.5
+rough = true
+bounce = 1.0
+absorbent = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_45f5d"]
 
@@ -31,7 +39,6 @@ bounce = 0.5
 script = ExtResource("1_l84up")
 
 [node name="Training Stats" type="VBoxContainer" parent="."]
-z_index = 1
 offset_right = 376.0
 offset_bottom = 180.0
 
@@ -108,6 +115,40 @@ text = "00
 fit_content = true
 scroll_active = false
 
+[node name="Game score" type="VBoxContainer" parent="."]
+offset_left = 904.0
+offset_right = 1280.0
+offset_bottom = 88.0
+
+[node name="Label" type="RichTextLabel" parent="Game score"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Game Score"
+fit_content = true
+scroll_active = false
+
+[node name="goal" type="HBoxContainer" parent="Game score"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Game score/goal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Goal         	:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Game score/goal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+scroll_active = false
+script = ExtResource("2_rilcx")
+
 [node name="STOP" type="Button" parent="."]
 offset_left = 1232.0
 offset_right = 1281.0
@@ -170,8 +211,23 @@ physics_material_override = SubResource("PhysicsMaterial_sp5e2")
 position = Vector2(-0.577042, -0.967393)
 shape = SubResource("RectangleShape2D_ogj38")
 
+[node name="Goal_right" type="Area2D" parent="."]
+position = Vector2(736, 320)
+script = ExtResource("3_7j6h6")
+
+[node name="body" type="MeshInstance2D" parent="Goal_right"]
+position = Vector2(336, 96)
+rotation = -1.57079
+scale = Vector2(176.5, 120.5)
+mesh = SubResource("QuadMesh_x6inh")
+
+[node name="coll" type="CollisionShape2D" parent="Goal_right"]
+position = Vector2(336, 96)
+shape = SubResource("RectangleShape2D_o0log")
+
 [node name="Ball" type="RigidBody2D" parent="."]
-position = Vector2(208, 312)
+position = Vector2(736, 320)
+mass = 5.18
 physics_material_override = SubResource("PhysicsMaterial_bvp2s")
 gravity_scale = 0.0
 linear_damp = 1.0
@@ -187,11 +243,10 @@ motion_mode = 1
 [node name="ground" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 z_index = -14
-position = Vector2(600, 360)
+position = Vector2(640, 360)
 scale = Vector2(1280, 720)
 mesh = SubResource("QuadMesh_45f5d")
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="Butler" type="Node2D" parent="."]
 script = ExtResource("5_rgwml")
@@ -199,4 +254,6 @@ script = ExtResource("5_rgwml")
 [connection signal="connected" from="." to="Butler" method="_on_environment_connected"]
 [connection signal="handel_action" from="." to="hexapod" method="_on_environment_handel_action"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
+[connection signal="body_entered" from="Goal_right" to="." method="_on_goal_right_body_entered"]
+[connection signal="body_entered" from="Goal_right" to="Game score/goal/Value" method="_on_goal_right_body_entered"]
 [connection signal="send_state_vector" from="Butler" to="." method="_on_butler_send_state_vector"]

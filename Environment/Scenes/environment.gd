@@ -29,21 +29,23 @@ func _process(delta):
 		if typeof(data) == TYPE_ARRAY and data.size() == 2:
 			var byte_array = PackedByteArray(data[1])  # Extract the byte data
 			var action_str = byte_array.get_string_from_utf8() # Convert to string
-			print(action_str)
+			#print(action_str)
 			handel_action.emit(action_str)
 
 
 
 
 func _on_butler_send_state_vector(state_vector):
-	print("from env:",state_vector)
+	#print("from env:",state_vector)
 	if client_DQN and client_DQN.get_status() ==2:
 		var serialized_data = JSON.stringify(state_vector)
 		print(serialized_data)
 		var byte_state = serialized_data.to_utf8_buffer()
 		client_DQN.put_data(byte_state)
-		
-		
-		
-		
-		
+
+
+
+var goal = 0
+func _on_goal_right_body_entered(body):
+	goal +=1 
+	print(goal)
