@@ -1,34 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddm2m44ueb3ox"]
+[gd_scene load_steps=5 format=3 uid="uid://cg1bgiayr5ivn"]
 
-[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_fq67i"]
+[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_wdekd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bvp2s"]
-friction = 0.8
-bounce = 0.5
+rough = true
+bounce = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_aluji"]
+[sub_resource type="SphereMesh" id="SphereMesh_7y1s3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x1pot"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqydv"]
 radius = 0.5
 
 [node name="Ball" type="RigidBody2D"]
-mass = 0.2
+mass = 5.18
 physics_material_override = SubResource("PhysicsMaterial_bvp2s")
 gravity_scale = 0.0
-linear_damp = 0.2
+linear_damp = 1.0
 angular_damp = 0.5
-script = ExtResource("1_fq67i")
+constant_force = Vector2(0.505, 0)
+script = ExtResource("1_wdekd")
 
-[node name="boundary_mesh" type="MeshInstance2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(36, 36)
-mesh = SubResource("SphereMesh_aluji")
-
-[node name="mesh" type="MeshInstance2D" parent="."]
-modulate = Color(1, 0, 0, 1)
+[node name="colro" type="MeshInstance2D" parent="."]
+modulate = Color(0.823529, 0, 0.435294, 1)
 scale = Vector2(32, 32)
-mesh = SubResource("SphereMesh_aluji")
+mesh = SubResource("SphereMesh_7y1s3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(36, 36)
-shape = SubResource("CircleShape2D_x1pot")
+[node name="colro2" type="CollisionShape2D" parent="."]
+modulate = Color(0.823529, 0, 0.435294, 1)
+scale = Vector2(32, 32)
+shape = SubResource("CircleShape2D_xqydv")

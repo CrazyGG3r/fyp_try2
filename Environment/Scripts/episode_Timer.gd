@@ -1,16 +1,18 @@
-extends Area2D
-
-
+extends Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	wait_time = 10
+	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
 
 
-func _on_body_entered(body):
-	pass # Replace with function body.
+
+
+
+func _on_master_handler_start():
+	start()

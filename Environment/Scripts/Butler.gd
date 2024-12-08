@@ -20,7 +20,7 @@ func _ready():
 	state_vector.fill(Vector2(0,0))
 
 @onready var hexapodd = $"../hexapod"
-@onready var ball = $"../Ball"
+@onready var ball = $"../ball_"
 @onready var wall_top = $"../top/coll"
 @onready var wall_bot =$"../bottom/coll"
 @onready var wall_right = $"../right/coll"
@@ -45,16 +45,16 @@ func _process(delta):
 		send_state_vector.emit(state_vector)
 	
 func calculate_polar_coordinate(entity):
-	var r = ball.balls[0].global_position.distance_to(entity.global_position)
-	var theta = ball.balls[0].global_position.angle_to_point(entity.global_position)
+	var r = ball.ball.global_position.distance_to(entity.global_position)
+	var theta = ball.ball.global_position.angle_to_point(entity.global_position)
 	return Vector2(r,theta)
 
 func calculate_y_distance(static_entity):
-	var d = ball.balls[0].global_position.y - static_entity.global_position.y
+	var d = ball.ball.global_position.y - static_entity.global_position.y
 	return d	
 	
 func calculate_x_distance(static_entity):
-	var d = ball.balls[0].global_position.x - static_entity.global_position.x
+	var d = ball.ball.global_position.x - static_entity.global_position.x
 	return d	
 	
 func _on_environment_connected():

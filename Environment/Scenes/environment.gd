@@ -4,6 +4,7 @@ var server = TCPServer.new()
 var client_DQN = server.take_connection()
 signal handel_action(action_str)
 signal connected()
+signal start()
 func _ready():
 	print("IP Address:", Global.ip_address)
 	print("Room Name:", Global.room_name)
@@ -35,17 +36,8 @@ func _process(delta):
 
 
 
+
+
+
 func _on_butler_send_state_vector(state_vector):
-	#print("from env:",state_vector)
-	if client_DQN and client_DQN.get_status() ==2:
-		var serialized_data = JSON.stringify(state_vector)
-		print(serialized_data)
-		var byte_state = serialized_data.to_utf8_buffer()
-		client_DQN.put_data(byte_state)
-
-
-
-var goal = 0
-func _on_goal_right_body_entered(body):
-	goal +=1 
-	print(goal)
+	pass # Replace with function body.

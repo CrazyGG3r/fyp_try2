@@ -36,7 +36,9 @@ func _physics_process(delta):
 		
 	fake_delta = delta
 		
-	
+func reset():
+	global_position = $"../Reset_positions/Hexapod".global_position
+	global_rotation = deg_to_rad(90)
 
 func _on_environment_handel_action(action_str):
 	if action_str == "FK":
