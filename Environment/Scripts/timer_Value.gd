@@ -3,9 +3,9 @@ extends RichTextLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	text = 	str("%.2f"%(float(timee.time_left)+1.0))
 
 
 @onready var timee = $"../episode_Timer"
 func _process(delta):
-	text = 	str(int(timee.time_left)+1)
+	text = 	str("%.2f"%(float(timee.time_left)))

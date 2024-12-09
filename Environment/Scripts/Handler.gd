@@ -18,29 +18,48 @@ func _process(delta):
 @onready var environment = $".."
 @onready var hexapod = $"../hexapod"
 @onready var ball = $"../ball_"
+@onready var timer = $"../Game score/time/episode_Timer"
 
-#positions
-@onready var hexpositions =$"../Reset_positions/Hexapod"
-@onready var ballpos = $"../Reset_positions/Ball"
+
+	
 #episode end
 func reset_epsiode():
+	reset_field()
+	goal = 0
+	reward = 0
+	timer.wait_time = 10
+func reset_field():
 	hexapod.reset()
 	ball.reset()
-	goal = 0
-	
+
+var episode_log = FileAccess.open("res://Data/episode_log.txt",FileAccess.READ_WRITE)
+
 func _on_episode_timer_timeout():
+	var line = "ep: " + str(episode_num) + "\treward: " + str(reward) + "\ttimer: " + str("%.1f"%timer.wait_time) + "\tgoals: " + str(goal)
+	episode_num += 1
+	game_no += 1
+	episode_log.seek_end()
+	episode_log.store_line(line)
 	reset_epsiode()
 
 
-var goal = 0
-
+var goal = -1
+signal re_timer()
 func _on_goal_right_body_entered(body):
-	goal +=1 
-	print(goal)
+	if body.name == "hexapod":
+		reward -= 100
+	else:
+		goal +=1 
+		reward += 100
+		re_timer.emit()
+		reset_field()
+
 
 signal start()
+
 func _on_start_pressed():
 	reset_epsiode()
+	timer.wait_time = 10
 	start.emit()
 
 

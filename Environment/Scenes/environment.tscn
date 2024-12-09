@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://byoqfilosh0qw"]
+[gd_scene load_steps=25 format=3 uid="uid://byoqfilosh0qw"]
 
 [ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
 [ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
@@ -6,10 +6,14 @@
 [ext_resource type="Script" path="res://Scripts/Handler.gd" id="2_okurt"]
 [ext_resource type="Script" path="res://Scripts/goal_Label.gd" id="2_rilcx"]
 [ext_resource type="Script" path="res://Scripts/Goal_right.gd" id="3_7j6h6"]
+[ext_resource type="Script" path="res://Scripts/episode_Value.gd" id="3_ajqfq"]
 [ext_resource type="Script" path="res://Scripts/Environment_name.gd" id="3_dv74r"]
+[ext_resource type="Script" path="res://Scripts/reward_Value.gd" id="4_0rjl2"]
 [ext_resource type="Script" path="res://Scripts/timer_Value.gd" id="4_b7yta"]
 [ext_resource type="Script" path="res://Scripts/Start.gd" id="5_2p0y3"]
+[ext_resource type="Script" path="res://Scripts/game_no_Value.gd" id="5_ajuad"]
 [ext_resource type="Script" path="res://Scripts/Butler.gd" id="5_rgwml"]
+[ext_resource type="Script" path="res://Scripts/ticker.gd" id="8_imeex"]
 [ext_resource type="Script" path="res://Scripts/episode_Timer.gd" id="9_ns3wx"]
 [ext_resource type="Script" path="res://Scripts/ball_.gd" id="10_erudo"]
 
@@ -43,7 +47,7 @@ script = ExtResource("2_okurt")
 
 [node name="Training Stats" type="VBoxContainer" parent="."]
 offset_right = 376.0
-offset_bottom = 180.0
+offset_bottom = 134.0
 
 [node name="Label" type="RichTextLabel" parent="Training Stats"]
 layout_mode = 2
@@ -75,27 +79,7 @@ text = "00
 "
 fit_content = true
 scroll_active = false
-
-[node name="Score" type="HBoxContainer" parent="Training Stats"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="RichTextLabel" parent="Training Stats/Score"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 30
-text = "Score			:"
-fit_content = true
-scroll_active = false
-
-[node name="Value" type="RichTextLabel" parent="Training Stats/Score"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 30
-text = "00
-"
-fit_content = true
-scroll_active = false
+script = ExtResource("3_ajqfq")
 
 [node name="GameNo" type="HBoxContainer" parent="Training Stats"]
 layout_mode = 2
@@ -117,6 +101,7 @@ text = "00
 "
 fit_content = true
 scroll_active = false
+script = ExtResource("5_ajuad")
 
 [node name="Game score" type="VBoxContainer" parent="."]
 offset_left = 904.0
@@ -148,9 +133,33 @@ scroll_active = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
 fit_content = true
 scroll_active = false
 script = ExtResource("2_rilcx")
+
+[node name="Score" type="HBoxContainer" parent="Game score"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Game score/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Score			:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Game score/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("4_0rjl2")
 
 [node name="time" type="HBoxContainer" parent="Game score"]
 layout_mode = 2
@@ -159,6 +168,9 @@ alignment = 1
 [node name="episode_Timer" type="Timer" parent="Game score/time"]
 wait_time = 11.0
 script = ExtResource("9_ns3wx")
+
+[node name="each second" type="Timer" parent="Game score/time/episode_Timer"]
+script = ExtResource("8_imeex")
 
 [node name="Label" type="RichTextLabel" parent="Game score/time"]
 layout_mode = 2
@@ -272,10 +284,10 @@ script = ExtResource("10_erudo")
 [node name="Reset_positions" type="Node2D" parent="."]
 
 [node name="Hexapod" type="Marker2D" parent="Reset_positions"]
-position = Vector2(320, 408)
+position = Vector2(784, 408)
 
 [node name="Ball" type="Marker2D" parent="Reset_positions"]
-position = Vector2(488, 408)
+position = Vector2(944, 408)
 
 [node name="ground" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -298,9 +310,13 @@ script = ExtResource("5_rgwml")
 [connection signal="connected" from="." to="Butler" method="_on_environment_connected"]
 [connection signal="handel_action" from="." to="hexapod" method="_on_environment_handel_action"]
 [connection signal="start" from="." to="Game score/time/episode_Timer" method="_on_environment_start"]
+[connection signal="re_timer" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_re_timer"]
 [connection signal="start" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_start"]
+[connection signal="tiemr_started" from="Game score/time/episode_Timer" to="Game score/time/episode_Timer/each second" method="_on_episode_timer_tiemr_started"]
 [connection signal="timeout" from="Game score/time/episode_Timer" to="Master Handler" method="_on_episode_timer_timeout"]
+[connection signal="timeout" from="Game score/time/episode_Timer/each second" to="Butler" method="_on_each_second_timeout"]
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
 [connection signal="pressed" from="Start" to="Master Handler" method="_on_start_pressed"]
 [connection signal="body_entered" from="Goal_right" to="Master Handler" method="_on_goal_right_body_entered"]
+[connection signal="action" from="hexapod" to="Butler" method="_on_hexapod_action"]
 [connection signal="send_state_vector" from="Butler" to="Master Handler" method="_on_butler_send_state_vector"]

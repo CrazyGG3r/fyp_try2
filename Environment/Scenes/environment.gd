@@ -38,6 +38,3 @@ func _process(delta):
 
 
 
-
-func _on_butler_send_state_vector(state_vector):
-	pass # Replace with function body.
