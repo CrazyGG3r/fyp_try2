@@ -27,11 +27,12 @@ def disconnect_from_server(screen= None, bg = None):
         client_socket.close()
         print("Disconnected from the server.")
 
-def send_Action(action= "Hello"):
+def send_Action(action= 0):
+    actions = {0:"FK",1:"BK",2:"LT",3:"RT",4:"L2",5:"R2"}
     if client_socket:
         try:
             client_socket.sendall(action.encode('utf-8'))
-            print(f"Action sent:{action}")
+            print(f"Action sent:{actions[action]}")
         except Exception as e:
             print(f"Failed to send action: {e}")
     else:
@@ -89,17 +90,21 @@ def environment(screen,bg = None):
         if flag_connect:
             try:
                 state_raw = receive_state()
-                reward = state_raw[24]
+                reward = state_raw.pop()
                 print(reward)
             except Exception as e:
                 print(f"Error: {e}")
                 
-            # state = np.reshape(1,len(state_raw))
-            # action = brain.act(state)
+            state = np.reshape(1,len(state_raw))
+            action = brain.act(state)
             
+            send_Action(action)
             
-            # state_raw = receive_state()
-            # next_state = np.reshape(1,len(state_raw))
+            next_state_raw = receive_state()
+            reward = next_state_raw.pop()
+            next_state = np.reshape(1,len(next_state_raw))
+            
+
             
         for a in all_butts:
             a.draw(screen)

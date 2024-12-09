@@ -7,7 +7,7 @@ extends Node2D
 #hexapodka distance and angle w.r.t ball.
 # Called when the node enters the scene tree for the first time.
 var state_vector = []
-var states = 25
+var states = 26
 var flag_connected = 1
 
 signal send_state_vector(state_vector)
@@ -28,6 +28,9 @@ func _ready():
 @onready var goal =  $"../Goal_right/coll"
 @onready var timer = $"../Game score/time/episode_Timer"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
+var done =  0
 
 func _process(delta):
 	if flag_connected == 1:
@@ -83,6 +86,7 @@ func _process(delta):
 		state_vector[23] = round(temp.y * 100) / 100.0
 		# rewardl
 		state_vector[24] = round(master.reward * 100) / 100.0
+		state_vector[25] = done
 		send_state_vector.emit(state_vector)
 		
 
@@ -113,3 +117,8 @@ func _on_each_second_timeout():
 	if prev_goal == master.goal:
 		master.reward	-= 5
 	
+func _on_episode_timer_timeout():
+	done = 1
+
+func _on_episode_timer_tiemr_started():
+	done = 0
