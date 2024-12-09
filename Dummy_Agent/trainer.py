@@ -87,12 +87,19 @@ def environment(screen,bg = None):
 
 
         if flag_connect:
-            state_raw = receive_state()
-            state = np.reshape(1,len(state_raw))
-            action = brain.act(state)
+            try:
+                state_raw = receive_state()
+                reward = state_raw[24]
+                print(reward)
+            except Exception as e:
+                print(f"Error: {e}")
+                
+            # state = np.reshape(1,len(state_raw))
+            # action = brain.act(state)
             
-            state_raw = receive_state()
-            next_state = np.reshape(1,len(state_raw))
+            
+            # state_raw = receive_state()
+            # next_state = np.reshape(1,len(state_raw))
             
         for a in all_butts:
             a.draw(screen)

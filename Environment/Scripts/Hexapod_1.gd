@@ -54,3 +54,30 @@ func _on_environment_handel_action(action_str):
 		
 	
 	print(action_str)
+
+
+func _on_master_handler_handel_action(action_str):
+	if action_str == "FK":
+		movement = Vector2( sin(rotation),-cos(rotation)) * SPEED
+		move_and_collide(movement*fake_delta)
+		action.emit()
+	if action_str == "BK":
+		movement = Vector2(sin(rotation),cos(rotation)) * SPEED
+		move_and_collide(-movement*fake_delta)
+		action.emit()
+	if action_str == "RT":
+		movement = Vector2( cos(rotation),sin(rotation)) * SPEED
+		move_and_collide(movement*fake_delta)
+		action.emit()
+	if action_str == "LT":
+		movement = Vector2( -cos(rotation),sin(rotation)) * -SPEED
+		move_and_collide(movement*fake_delta)
+		action.emit()
+	if action_str == "R2":
+		rotation += angular_speed 
+		action.emit()
+	if action_str == "L2":
+		rotation -= angular_speed
+		action.emit()
+		
+

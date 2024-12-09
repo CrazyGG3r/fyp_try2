@@ -13,6 +13,7 @@ client_socket = None
 flag_connect = False
 def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9999):
     global client_socket
+    global flag_connect
     try:
         server_address = (addr, port)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -142,8 +143,6 @@ def environment(screen,bg = None):
                 a.action(screen,bg)
         if flag_connect:
             receive_state()
-        else:
-            print("Not connected")
         pygame.display.flip()
     
    

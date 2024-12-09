@@ -61,7 +61,8 @@ func _on_start_pressed():
 	reset_epsiode()
 	timer.wait_time = 10
 	start.emit()
-
+	
+signal handel_action(action)
 
 func _on_butler_send_state_vector(state_vector):
 	#print("from env:",state_vector)
@@ -70,5 +71,13 @@ func _on_butler_send_state_vector(state_vector):
 		print(serialized_data)
 		var byte_state = serialized_data.to_utf8_buffer()
 		environment.client_DQN.put_data(byte_state)
+		get_tree().paused = true
+		var data = environment.client_DQN.get_data(2)	
+		if typeof(data) == TYPE_ARRAY and data.size() == 2:
+			var byte_array = PackedByteArray(data[1])  # Extract the byte data
+			var action_str = byte_array.get_string_from_utf8() # Convert to string
+			print(action_str)
+			handel_action.emit(action_str)
+			get_tree().paused = false
 
 

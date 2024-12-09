@@ -77,15 +77,12 @@ func _process(delta):
 		temp = calculate_polar_coordinate(hexapodd, goal)
 		state_vector[20] = round(temp.x * 100) / 100.0
 		state_vector[21] = round(temp.y * 100) / 100.0
-		# reward
-		state_vector[22] = round(master.reward * 100) / 100.0
 		# timer
 		temp = Vector2(timer.wait_time, timer.time_left)
-		state_vector[23] = round(temp.x * 100) / 100.0
-		state_vector[24] = round(temp.y * 100) / 100.0
-		#for n in state_vector.size():
-			#var a = state_vector[n]
-			#state_vector[n] = a.round(2)
+		state_vector[22] = round(temp.x * 100) / 100.0
+		state_vector[23] = round(temp.y * 100) / 100.0
+		# rewardl
+		state_vector[24] = round(master.reward * 100) / 100.0
 		send_state_vector.emit(state_vector)
 		
 

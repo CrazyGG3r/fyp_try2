@@ -310,6 +310,7 @@ script = ExtResource("5_rgwml")
 [connection signal="connected" from="." to="Butler" method="_on_environment_connected"]
 [connection signal="handel_action" from="." to="hexapod" method="_on_environment_handel_action"]
 [connection signal="start" from="." to="Game score/time/episode_Timer" method="_on_environment_start"]
+[connection signal="handel_action" from="Master Handler" to="hexapod" method="_on_master_handler_handel_action"]
 [connection signal="re_timer" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_re_timer"]
 [connection signal="start" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_start"]
 [connection signal="tiemr_started" from="Game score/time/episode_Timer" to="Game score/time/episode_Timer/each second" method="_on_episode_timer_tiemr_started"]
