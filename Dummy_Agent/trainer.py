@@ -1,4 +1,3 @@
-
 import pygame
 pygame.init()
 from effects import * 
@@ -6,22 +5,19 @@ import socket
 import random 
 import ast
 import json
-
-# from noobs_gpu import DQNAgent
-
+from noobs_cpu import Agent
+import numpy as np
 client_socket = None
 flag_connect = False
 def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9999):
     global client_socket
+    global flag_connect
     try:
         server_address = (addr, port)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(server_address)
         print("Connected to the server.")
         flag_connect = True
-        
-        
-
     except Exception as e:
         print(f"Connection failed: {e}")
         return None
@@ -44,24 +40,18 @@ def send_Action(action= "Hello"):
 def receive_state(action = "None"):
     if client_socket:
         try:
-          data = client_socket.recv(1024)
-          if data:
-              decoded_state = data.decode("utf-8")
-              print("state: ",decoded_state)
-              json_decoded_data = json.loads(decoded_state)
-              parsed_data = [ast.literal_eval(item) for item in json_decoded_data]
-              print("sttta: ",parsed_data)
-              return parsed_data
+            data = client_socket.recv(1024)
+            if data:
+                decoded_state = data.decode("utf-8")
+                # print("state: ", decoded_state)
+                # Directly parse the JSON data
+                json_decoded_data = json.loads(decoded_state)
+                print("state: ", json_decoded_data)
+                
+                return json_decoded_data
         except Exception as e:
             print(f"Error receiving data: {e}")
-        
 state = None
-
-
-
-
-
-        
 
 def environment(screen,bg = None):
     c1 = (20,1,1)
@@ -73,34 +63,37 @@ def environment(screen,bg = None):
     button1 = button((screen.get_width()/8,100),90,c2,c1,butt1,8,connect_to_env)
     butt2 = Text((0,0),30,(192,20,2),"Disconnect",)
     button2 = button((screen.get_width()*7/8,100),90,c2,c1,butt2,8,disconnect_from_server)
-    #-0-0-0--00-0-0-0-0-0-0-
-    #=-=-=-=- Action Buttons
-    text_mov_up     = Text((0,0),25,(200,28,10),"UP   ")
-    text_mov_down   = Text((0,0),25,(200,28,10),"DOWN ")
-    text_mov_left   = Text((0,0),25,(200,28,10),"LEFT ")
-    text_mov_right  = Text((0,0),25,(200,28,10),"RIGHT")
-    text_rot_right  = Text((0,0),25,(200,28,10),"20 DEG >") 
-    text_rot_left   = Text((0,0),25,(200,28,10),"20 DEG <")
-    text_random_but  = Text((0,0),25,(200,28,10),"Random")
-    button_up       = button((screen.get_width()*1/8,300),75,c2,c1,text_mov_up   ,4,send_Action,"FK",2) 
-    button_down     = button((screen.get_width()*2/8,300),75,c2,c1,text_mov_down ,4,send_Action,"BK",2)
-    button_left     = button((screen.get_width()*3/8,300),75,c2,c1,text_mov_left ,4,send_Action,"LT",2)
-    button_right    = button((screen.get_width()*4/8,300),75,c2,c1,text_mov_right,4,send_Action,"RT",2)
-    button_rt_right = button((screen.get_width()*5/8,300),75,c2,c1,text_rot_right,4,send_Action,"R2",2)  
-    button_rt_left  = button((screen.get_width()*6/8,300),75,c2,c1,text_rot_left ,4,send_Action,"L2",2)  
-    button_random  = button((screen.get_width()*1/8,500),80,c2,c1,text_random_but ,4,send_Action,"RA",2)  
-    all_butts = [button1,button2,button_up,button_right,button_down,button_left,button_rt_left,button_rt_right,button_random]
-    command_butts = [button_up,button_right,button_down,button_left,button_rt_left,button_rt_right]
+    butt3 = Text((0,0),30,(192,20,2),"Start Training",)
+    button3 = button((screen.get_width()*4/8,100),110,c2,c1,butt3,8)
+    all_butts = [button1,button2,button3]
+    
+    #-0-0-0--00-0-0-0-0-0-0- DQN AGENT
+    
+    
+    brain = Agent(22,6)
+    batch_size = 16
+    replay_interval = 10  # Replay every 10 steps
+    save_interval = 1000  #
+
     running = True
-    ##____--=-=-=-=-=-==-=- Agent declaration and stufff___#####
-    # brain = DQNAgent(22,6)
-    flag_rand = 0
-    flag_connect = 0
+    episode = 0
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
         clicked_buttons = []
 
+
+
+
+
+        if flag_connect:
+            state_raw = receive_state()
+            state = np.reshape(1,len(state_raw))
+            action = brain.act(state)
+            
+            state_raw = receive_state()
+            next_state = np.reshape(1,len(state_raw))
+            
         for a in all_butts:
             a.draw(screen)
         for event in pygame.event.get():
@@ -127,9 +120,6 @@ def environment(screen,bg = None):
                     a.shape.flag = 0
             else:
                 a.hover = False
-        if flag_rand == 1 and client_socket:
-            temp = random.choice(command_butts)
-            temp.action(temp.value)
         for a in clicked_buttons:
             a.isClicked = False
             if a.text.text != "Connect" or a.text.text!= "Disconnect":
@@ -140,10 +130,4 @@ def environment(screen,bg = None):
                 a.action(a.value)
             else:
                 a.action(screen,bg)
-        if flag_connect:
-            receive_state()
-        else:
-            print("Not connected")
         pygame.display.flip()
-    
-   

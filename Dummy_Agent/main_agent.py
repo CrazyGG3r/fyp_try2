@@ -3,6 +3,7 @@ pygame.init()
 
 from effects import *
 from to_environment import environment
+import trainer
 
 
 screen = pygame.display.set_mode((1280, 720))
@@ -22,7 +23,7 @@ button1= button((screen.get_width()/6,190),90,c1,c2,instructions,8)
 txtt = Text((0,0),45,(192,20,2),"Environment")
 button2 = button((screen.get_width()/4,button1.y+ 200),140,(20,1,1),(195,25,5),txtt,7,func = environment)
 txtt22 = Text((0,0),70,(192,20,2),"Hexapod")
-button5 = button((screen.get_width()*0.75,button1.y+ 200),140,(20,1,1),(195,25,5),txtt22,7)
+button5 = button((screen.get_width()*0.75,button1.y+ 200),140,(20,1,1),(195,25,5),txtt22,7,func = trainer.environment)
 creditss = Text((0,0),30,(192,20,2)," Credits")
 button3 = button(((screen.get_width()/6)*5,200),60,c1,c2,creditss,8)
 Start_train = Text((0,0),25,(192,20,2)," Start Trainig")
