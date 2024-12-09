@@ -7,6 +7,8 @@ import random
 import ast
 import json
 
+from noobs import DQNAgent
+
 client_socket = None
 
 def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9999):
@@ -89,8 +91,11 @@ def environment(screen,bg = None):
     all_butts = [button1,button2,button_up,button_right,button_down,button_left,button_rt_left,button_rt_right,button_random]
     command_butts = [button_up,button_right,button_down,button_left,button_rt_left,button_rt_right]
     running = True
+    ##____--=-=-=-=-=-==-=- Agent declaration and stufff___#####
+    brain = DQNAgent(22,6)
     
     flag_rand = 0
+    flag_connect = 0
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
@@ -127,6 +132,8 @@ def environment(screen,bg = None):
             temp.action(temp.value)
         for a in clicked_buttons:
             a.isClicked = False
+            if a.text.text == "Connect":
+                flag_connect == True
             if a.text.text != "Connect" or a.text.text!= "Disconnect":
                 if a.value == "RA" and flag_rand == 0:
                     flag_rand = 1
@@ -135,7 +142,10 @@ def environment(screen,bg = None):
                 a.action(a.value)
             else:
                 a.action(screen,bg)
-        receive_state()
+        if flag_connect:
+            receive_state()
+        else:
+            print("Not connected")
         pygame.display.flip()
     
    

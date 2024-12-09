@@ -7,7 +7,7 @@ extends Node2D
 #hexapodka distance and angle w.r.t ball.
 # Called when the node enters the scene tree for the first time.
 var state_vector = []
-var states = 12
+var states = 14
 var flag_connected = 1
 
 signal send_state_vector(state_vector)
@@ -26,6 +26,7 @@ func _ready():
 @onready var wall_right = $"../right/coll"
 @onready var wall_left =$"../left/coll"
 @onready var goal =  $"../Goal_right/coll"
+@onready var timer = $"../Game score/time/episode_Timer"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
@@ -53,9 +54,11 @@ func _process(delta):
 		#goal from ball
 		state_vector[9] = calculate_polar_coordinate(ball.ball,goal)
 		#goal from hexapodd
-		state_vector[10] = calculate_polar_coordinate(ball.ball,goal)
-		#
+		state_vector[10] = calculate_polar_coordinate(hexapodd,goal)
+		#reward
 		state_vector[11] = master.reward
+		#timer
+		state_vector[13] = Vector2(timer.wait_time,timer.time_left)
 		
 		
 		send_state_vector.emit(state_vector)

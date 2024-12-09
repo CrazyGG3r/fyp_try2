@@ -243,3 +243,4 @@ ep: 238	reward: 0	timer: 10.0	goals: 0
 ep: 239	reward: 0	timer: 10.0	goals: 0
 ep: 240	reward: 0	timer: 10.0	goals: 0
 ep: 241	reward: 0	timer: 10.0	goals: 0
+ep: 0	reward: 100	timer: 10.0	goals: 0
