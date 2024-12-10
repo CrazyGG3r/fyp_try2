@@ -28,10 +28,10 @@ def disconnect_from_server(screen= None, bg = None):
         print("Disconnected from the server.")
 
 def send_Action(action= 0):
-    actions = {0:"FK",1:"BK",2:"LT",3:"RT",4:"L2",5:"R2"}
+    actions = {0:"FK",1:"BK",2:"LT",3:"RT",4:"L2",5:"R2",6:"00"}
     if client_socket:
         try:
-            client_socket.sendall(action.encode('utf-8'))
+            client_socket.sendall(actions[action].encode('utf-8'))
             print(f"Action sent:{actions[action]}")
         except Exception as e:
             print(f"Failed to send action: {e}")
@@ -47,7 +47,7 @@ def receive_state(action = "None"):
                 # print("state: ", decoded_state)
                 # Directly parse the JSON data
                 json_decoded_data = json.loads(decoded_state)
-                print("state: ", json_decoded_data)
+                # print("state: ", json_decoded_data)
                 
                 return json_decoded_data
         except Exception as e:
@@ -71,13 +71,14 @@ def environment(screen,bg = None):
     #-0-0-0--00-0-0-0-0-0-0- DQN AGENT
     
     
-    brain = Agent(22,6)
-    batch_size = 16
-    replay_interval = 10  # Replay every 10 steps
-    save_interval = 1000  #
-
+    brain = Agent(24,6)
+    batch_size = 64
+    replay_interval = 32  # Replay every 10 steps
+    save_interval = 1 #save every episode
+    actions = 0
     running = True
     episode = 0
+    step = 0
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
@@ -88,22 +89,40 @@ def environment(screen,bg = None):
 
 
         if flag_connect:
-            try:
-                state_raw = receive_state()
-                reward = state_raw.pop()
-                print(reward)
-            except Exception as e:
-                print(f"Error: {e}")
+            
+            state_raw = receive_state()
+            reward = state_raw.pop()
+            done = state_raw.pop()
                 
-            state = np.reshape(1,len(state_raw))
+            state = np.reshape(state_raw, (1, len(state_raw)))
             action = brain.act(state)
+            print(state_raw,reward,done)
             
             send_Action(action)
-            
+
+
             next_state_raw = receive_state()
             reward = next_state_raw.pop()
-            next_state = np.reshape(1,len(next_state_raw))
+            done = next_state_raw.pop()
+            next_state = np.reshape(next_state_raw, (1, len(state_raw)))
+
+            if done == 1:
+                done = True
+                episode+= 1
+                brain.save(f"Dummy_Agent\\Weights\\brain_ep_{episode}.weights.h5")
+
+                
+            else:
+                done = False
+                
+            brain.remember(state,action,reward,next_state,done)
+            send_Action(6)
+
+            step += 1  # Track steps independently
             
+            if step % replay_interval == 0 and len(brain.memory) >= batch_size:
+                print("Replaying...")
+                brain.replay(batch_size)
 
             
         for a in all_butts:

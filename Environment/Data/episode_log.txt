@@ -1,6 +1,0 @@
-ep: 0	reward: 100	timer: 10.0	goals: 0
-ep: 1	reward: 0	timer: 10.0	goals: 0
-ep: 2	reward: 0	timer: 10.0	goals: 0
-ep: 3	reward: 0	timer: 10.0	goals: 0
-ep: 4	reward: 0	timer: 10.0	goals: 0
-ep: 5	reward: 0	timer: 10.0	goals: 0

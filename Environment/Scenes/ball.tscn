@@ -12,7 +12,7 @@ bounce = 1.0
 radius = 0.5
 
 [node name="Ball" type="RigidBody2D"]
-mass = 5.18
+mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_bvp2s")
 gravity_scale = 0.0
 linear_damp = 1.0

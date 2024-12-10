@@ -9,9 +9,19 @@ var reward      = 0
 var game_no     = 0
 
 
+var episode_log = FileAccess.open("res://Data/episode_log.txt",FileAccess.READ_WRITE)
+var training_number = FileAccess.open("res://Data/training_num.txt",FileAccess.READ)
+var t_num = 0
 signal nextep()
 func _ready():
-	pass # Replace with function body.
+	t_num = int(training_number.get_as_text().strip_edges()) 
+	var name_f = "res://Data/episode_log_"+str(t_num)+ ".txt"
+	episode_log = FileAccess.open(name_f,FileAccess.WRITE)
+	episode_log = FileAccess.open(name_f,FileAccess.READ_WRITE)
+	t_num += 1
+	training_number = FileAccess.open("res://Data/training_num.txt",FileAccess.WRITE)
+	training_number.store_line(str(t_num))
+	training_number.close()
 func _process(delta):
 	pass
 
@@ -31,8 +41,6 @@ func reset_epsiode():
 func reset_field():
 	hexapod.reset()
 	ball.reset()
-
-var episode_log = FileAccess.open("res://Data/episode_log.txt",FileAccess.READ_WRITE)
 
 func _on_episode_timer_timeout():
 	var line = "ep: " + str(episode_num) + "\treward: " + str(reward) + "\ttimer: " + str("%.1f"%timer.wait_time) + "\tgoals: " + str(goal)

@@ -33,6 +33,7 @@ func _ready():
 var done =  0
 
 func _process(delta):
+	check_distance()
 	if flag_connected == 1:
 		var temp = Vector2.ZERO
 		# Hexapod from ball
@@ -85,10 +86,14 @@ func _process(delta):
 		state_vector[22] = round(temp.x * 100) / 100.0
 		state_vector[23] = round(temp.y * 100) / 100.0
 		# rewardl
-		state_vector[24] = round(master.reward * 100) / 100.0
-		state_vector[25] = done
+		if done == 1:
+			state_vector[24] = done
+			done = 0
+		else:
+			state_vector[24] = done
+		state_vector[25] = round(master.reward * 100) / 100.0
 		send_state_vector.emit(state_vector)
-		
+		timer.paused = false
 
 
 func calculate_polar_coordinate(entity1,entity2):
@@ -115,10 +120,34 @@ var prev_goal = 0
 
 func _on_each_second_timeout():
 	if prev_goal == master.goal:
-		master.reward	-= 5
+		master.reward	-= 2 #to encourage faster goal 
+	prev_goal == master.goal
 	
 func _on_episode_timer_timeout():
 	done = 1
+	timer.paused = true
 
 func _on_episode_timer_tiemr_started():
 	done = 0
+
+func check_distance():
+	if calculate_polar_coordinate(hexapodd,ball.ball).x < 100:
+		master.reward += 0.001
+	
+	#print(calculate_y_distance(hexapodd,wall_top))
+	if calculate_y_distance(hexapodd,wall_top)< 170.0:
+		#print("top")
+		master.reward -= 0.002
+	#print(calculate_y_distance(wall_bot,hexapodd))
+	if calculate_y_distance(wall_bot,hexapodd)< 170.0:
+		#print("bottom")
+		master.reward -= 0.002
+	#print(calculate_x_distance(wall_right,hexapodd))
+	if calculate_x_distance(wall_right,hexapodd)< 172.0:
+		#print("right")
+		master.reward -= 0.002
+	#print(calculate_x_distance(hexapodd,wall_left))
+	if calculate_x_distance(hexapodd,wall_left)< 170.0:
+		#print("left")
+		master.reward -= 0.002
+		

@@ -67,16 +67,3 @@ class Agent:
     def load(self, filename):
         self.model.load_weights(filename)
 
-
-# class Environment:
-#     def __init__(self,screen,type = 0):
-#         pass
-        
-#     def reset(self,screen):
-#         pass 
-
-#     def step(self,screen,action):#updating environment - implements actions -returns reward or gameover
-#         pass
-#    
-#   def render(self,screen):  #       pass
-

@@ -170,6 +170,7 @@ wait_time = 11.0
 script = ExtResource("9_ns3wx")
 
 [node name="each second" type="Timer" parent="Game score/time/episode_Timer"]
+autostart = true
 script = ExtResource("8_imeex")
 
 [node name="Label" type="RichTextLabel" parent="Game score/time"]
@@ -279,15 +280,16 @@ shape = SubResource("RectangleShape2D_o0log")
 
 [node name="ball_" type="RigidBody2D" parent="."]
 position = Vector2(984, 408)
+mass = 5.0
 script = ExtResource("10_erudo")
 
 [node name="Reset_positions" type="Node2D" parent="."]
 
 [node name="Hexapod" type="Marker2D" parent="Reset_positions"]
-position = Vector2(784, 408)
+position = Vector2(376, 400)
 
 [node name="Ball" type="Marker2D" parent="Reset_positions"]
-position = Vector2(944, 408)
+position = Vector2(616, 400)
 
 [node name="ground" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -298,7 +300,7 @@ mesh = SubResource("QuadMesh_45f5d")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="hexapod" parent="." instance=ExtResource("2_0eu02")]
+[node name="hexapod" parent="." groups=["hexapod"] instance=ExtResource("2_0eu02")]
 position = Vector2(888, 392)
 rotation = 1.5708
 scale = Vector2(1.055, 1.055)
@@ -321,5 +323,7 @@ script = ExtResource("5_rgwml")
 [connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
 [connection signal="pressed" from="Start" to="Master Handler" method="_on_start_pressed"]
 [connection signal="body_entered" from="Goal_right" to="Master Handler" method="_on_goal_right_body_entered"]
+[connection signal="body_entered" from="ball_" to="ball_" method="_on_body_entered"]
+[connection signal="body_entered" from="ball_" to="Butler" method="_on_ball__body_entered"]
 [connection signal="action" from="hexapod" to="Butler" method="_on_hexapod_action"]
 [connection signal="send_state_vector" from="Butler" to="Master Handler" method="_on_butler_send_state_vector"]

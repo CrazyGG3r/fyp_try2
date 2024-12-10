@@ -1,6 +1,5 @@
 extends RigidBody2D
-
-
+signal touched_ball()
 # Called when the node enters the scene tree for the first time.
 @onready var start_pos = $"../Reset_positions/Ball"
 var ball_scene = preload("res://Scenes/ball.tscn")
@@ -22,3 +21,15 @@ func reset():
 	load_ball()
 func _process(delta):
 	pass
+
+func _on_body_entered(body):
+	if body.is_in_group("hexapodd"):
+		touched_ball.emit()  # Emit custom signal when player collides
+		print("Player touched the ball!")
+
+
+#func _on_area_2d_body_entered(body):
+	#if body.is_in_group("hexapod only"):
+		#print("please be you ")
+
+
