@@ -72,22 +72,18 @@ def environment(screen,bg = None):
     
     
     brain = Agent(24,6)
+    brain.load("Dummy_Agent\\Weights\\brain_ep_626.weights.h5")
     batch_size = 64
     replay_interval = 32  # Replay every 10 steps
     save_interval = 1 #save every episode
     actions = 0
     running = True
-    episode = 0
+    episode = 61
     step = 0
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
         clicked_buttons = []
-
-
-
-
-
         if flag_connect:
             
             state_raw = receive_state()
@@ -120,9 +116,9 @@ def environment(screen,bg = None):
 
             step += 1  # Track steps independently
             
-            if step % replay_interval == 0 and len(brain.memory) >= batch_size:
-                print("Replaying...")
-                brain.replay(batch_size)
+            # if step % replay_interval == 0 and len(brain.memory) >= batch_size:
+            #     print("Replaying...")
+            #     brain.replay(batch_size)
 
             
         for a in all_butts:

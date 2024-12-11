@@ -56,6 +56,7 @@ signal re_timer()
 func _on_goal_right_body_entered(body):
 	if body.name == "hexapod":
 		reward -= 100
+		hexapod.reset()
 	else:
 		goal +=1 
 		reward += 100
@@ -66,8 +67,10 @@ func _on_goal_right_body_entered(body):
 signal start()
 
 func _on_start_pressed():
-	reset_epsiode()
-	timer.wait_time = 10
+	#reset_epsiode()
+	ball.reset()
+	hexapod.reset()
+	#timer.wait_time = 10
 	start.emit()
 	
 signal handel_action(action)

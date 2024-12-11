@@ -264,6 +264,9 @@ physics_material_override = SubResource("PhysicsMaterial_sp5e2")
 position = Vector2(-0.577042, -0.967393)
 shape = SubResource("RectangleShape2D_ogj38")
 
+[node name="goal_barrier" type="StaticBody2D" parent="."]
+position = Vector2(736, 320)
+
 [node name="Goal_right" type="Area2D" parent="."]
 position = Vector2(736, 320)
 script = ExtResource("3_7j6h6")
@@ -286,10 +289,10 @@ script = ExtResource("10_erudo")
 [node name="Reset_positions" type="Node2D" parent="."]
 
 [node name="Hexapod" type="Marker2D" parent="Reset_positions"]
-position = Vector2(376, 400)
+position = Vector2(673, 402)
 
 [node name="Ball" type="Marker2D" parent="Reset_positions"]
-position = Vector2(616, 400)
+position = Vector2(839, 401)
 
 [node name="ground" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)

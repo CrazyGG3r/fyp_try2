@@ -121,7 +121,7 @@ var prev_goal = 0
 func _on_each_second_timeout():
 	if prev_goal == master.goal:
 		master.reward	-= 2 #to encourage faster goal 
-	prev_goal == master.goal
+		
 	
 func _on_episode_timer_timeout():
 	done = 1
