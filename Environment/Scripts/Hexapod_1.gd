@@ -82,4 +82,3 @@ func _on_master_handler_handel_action(action_str):
 		action.emit()
 	print(action_str)
 		
-

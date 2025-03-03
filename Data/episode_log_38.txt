@@ -318,7 +318,7 @@ ep: 316	reward: 53.1999999999999	timer: 10.0	goals: 0
 ep: 317	reward: -11.7	timer: 10.0	goals: 0
 ep: 318	reward: -106.8	timer: 10.0	goals: 0
 ep: 319	reward: 56.7999999999999	timer: 10.0	goals: 0
-ep: 320	reward: 25.2	timer: 10.0	goals: 0
+ep: 320	reward: 25.2	timer: 10.0	goals: 0    
 ep: 321	reward: -11.3	timer: 10.0	goals: 0
 ep: 322	reward: -11.7	timer: 10.0	goals: 0
 ep: 323	reward: -11.8	timer: 10.0	goals: 0

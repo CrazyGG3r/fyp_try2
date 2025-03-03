@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://coc44dgehylgt"]
+
+[ext_resource type="Script" path="res://re_/plaeyr.gd" id="1_xogam"]
+[ext_resource type="Script" path="res://re_/ball.gd" id="1_xwbpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mb2qs"]
+size = Vector2(1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dxcrb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v142a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_acihq"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dc07"]
+size = Vector2(0.98, 0.98)
+
+[sub_resource type="QuadMesh" id="QuadMesh_26vsl"]
+
+[node name="Ground" type="Node2D"]
+
+[node name="wall2" type="StaticBody2D" parent="."]
+position = Vector2(541, 537)
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionShape2D" parent="wall2"]
+scale = Vector2(962, 12)
+shape = SubResource("RectangleShape2D_mb2qs")
+
+[node name="look" type="MeshInstance2D" parent="wall2"]
+modulate = Color(0.145098, 1, 1, 1)
+scale = Vector2(960, 12)
+mesh = SubResource("QuadMesh_dxcrb")
+
+[node name="wall3" type="StaticBody2D" parent="."]
+position = Vector2(64, 304)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionShape2D" parent="wall3"]
+scale = Vector2(962, 12)
+shape = SubResource("RectangleShape2D_mb2qs")
+
+[node name="look" type="MeshInstance2D" parent="wall3"]
+modulate = Color(0.145098, 1, 1, 1)
+scale = Vector2(960, 12)
+mesh = SubResource("QuadMesh_dxcrb")
+
+[node name="wall4" type="StaticBody2D" parent="."]
+texture_filter = 1
+position = Vector2(1016, 304)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionShape2D" parent="wall4"]
+scale = Vector2(962, 12)
+shape = SubResource("RectangleShape2D_mb2qs")
+
+[node name="look" type="MeshInstance2D" parent="wall4"]
+modulate = Color(0.145098, 1, 1, 1)
+scale = Vector2(960, 12)
+mesh = SubResource("QuadMesh_dxcrb")
+
+[node name="wall" type="StaticBody2D" parent="."]
+texture_filter = 1
+position = Vector2(540, 64)
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionShape2D" parent="wall"]
+scale = Vector2(962, 12)
+shape = SubResource("RectangleShape2D_mb2qs")
+
+[node name="look" type="MeshInstance2D" parent="wall"]
+modulate = Color(0.145098, 1, 1, 1)
+scale = Vector2(960, 12)
+mesh = SubResource("QuadMesh_dxcrb")
+
+[node name="ball" type="RigidBody2D" parent="."]
+position = Vector2(200, 144)
+mass = 2.0
+gravity_scale = 0.0
+script = ExtResource("1_xwbpc")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_v142a")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ball"]
+scale = Vector2(2, 2)
+mesh = SubResource("SphereMesh_acihq")
+
+[node name="plaeyr" type="CharacterBody2D" parent="."]
+modulate = Color(1, 0.588235, 0, 1)
+position = Vector2(128, 152)
+script = ExtResource("1_xogam")
+metadata/_edit_group_ = true
+
+[node name="KickArea" type="Area2D" parent="plaeyr"]
+position = Vector2(-88, -144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plaeyr/KickArea"]
+position = Vector2(88, 144)
+scale = Vector2(52, 52)
+shape = SubResource("RectangleShape2D_8dc07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plaeyr"]
+scale = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_8dc07")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="plaeyr"]
+scale = Vector2(50, 50)
+mesh = SubResource("QuadMesh_26vsl")
+
+[connection signal="body_entered" from="plaeyr/KickArea" to="plaeyr" method="_on_kick_area_body_entered"]

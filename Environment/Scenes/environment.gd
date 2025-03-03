@@ -25,9 +25,3 @@ func _process(delta):
 			connected.emit()
 	
 	# Read data from the client if available
-
-
-
-
-
-

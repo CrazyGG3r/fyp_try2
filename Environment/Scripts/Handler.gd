@@ -90,5 +90,3 @@ func _on_butler_send_state_vector(state_vector):
 			print(action_str)
 			handel_action.emit(action_str)
 			get_tree().paused = false
-
-
