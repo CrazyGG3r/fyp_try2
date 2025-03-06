@@ -207,8 +207,3 @@ metadata/_edit_group_ = true
 modulate = Color(0.0470588, 0.341176, 1, 1)
 position = Vector2(-1.90735e-06, 0)
 mesh = SubResource("QuadMesh_dbg65")
-
-[node name="fuck it" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="fuck it"]
-polygon = PackedVector2Array(-40, 64, -48, 56, -64, 8, -64, -8, -56, -56, -40, -72, 40, -72, 48, -64, 56, -56, 64, -8, 64, 16, 48, 64)
