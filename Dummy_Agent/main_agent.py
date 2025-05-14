@@ -27,23 +27,19 @@ txtt22 = Text((0,0),70,(192,20,2),"Hexapod")
 button5 = button((screen.get_width()*0.75,button1.y+ 200),140,(20,1,1),(195,25,5),txtt22,7,func = trainer.environment)
 creditss = Text((0,0),30,(192,20,2)," Credits")
 button3 = button(((screen.get_width()/6)*5,200),60,c1,c2,creditss,8,func = to_butler)
-SARSA_text = Text((0,0),25,(192,20,2),"    SARSA")
+SARSA_text = Text((0,0),25,(192,20,2),"    REAL")
 button4 = button(((screen.get_width()/6)*3,400),60,c1,c2,SARSA_text,func = trainer_sarsa.environment)
 all_butts = [button1,button2,button3,button4,button5]
 while running:
     clock.tick(60)
     screen.fill((1,1,1))
     clicked_buttons = []
-    
     bg.draw(screen)
-    
     for a in textscreen:
         a.draw(screen)
     for a in all_butts:
         a.draw(screen)
-        
     pygame.display.flip()
-  
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

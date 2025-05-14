@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "author": "Bonny Rais",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": -473.2,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "chip-pca9685", "id": "chip2", "top": -190.98, "left": 43.2, "attrs": {} },
+    {
+      "type": "wokwi-servo",
+      "id": "servo2",
+      "top": -415.6,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo3",
+      "top": -358,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo4",
+      "top": -300.4,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo5",
+      "top": -242.8,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo6",
+      "top": -185.2,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo7",
+      "top": -127.6,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo8",
+      "top": -70,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo9",
+      "top": -12.4,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo10",
+      "top": 45.2,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo11",
+      "top": 102.8,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo12",
+      "top": 160.4,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo13",
+      "top": 218,
+      "left": -362,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp1",
+      "top": -319.6,
+      "left": 283.76,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": -527.24, "left": -134.4, "attrs": {} },
+    {
+      "type": "wokwi-gnd",
+      "id": "gnd1",
+      "top": -526.6,
+      "left": -96.2,
+      "rotate": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "chip2:LED0", "servo1:PWM", "green", [ "h-164.54", "v-20.52" ] ],
+    [ "chip2:LED12", "servo13:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED11", "servo12:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED10", "servo11:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED9", "servo10:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED8", "servo9:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED7", "servo8:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED6", "servo7:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED5", "servo6:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED4", "servo5:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED3", "servo4:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED2", "servo3:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "chip2:LED1", "servo2:PWM", "green", [ "h78.61", "v364.8" ] ],
+    [ "servo2:V+", "servo1:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo3:V+", "servo2:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo4:V+", "servo3:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo5:V+", "servo4:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo6:V+", "servo5:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo7:V+", "servo6:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo8:V+", "servo7:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo9:V+", "servo8:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo10:V+", "servo9:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo11:V+", "servo10:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo12:V+", "servo11:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo13:V+", "servo112:V+", "red", [ "h28.8", "v-57.7", "h-19.2" ] ],
+    [ "servo13:V+", "servo12:V+", "red", [ "h28.8", "v-57.7" ] ],
+    [ "servo2:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo3:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo4:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo5:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo6:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo7:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo8:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo9:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo10:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo11:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo12:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "servo13:GND", "servo1:GND", "black", [ "h48", "v-48" ] ],
+    [ "chip2:SCL", "esp1:22", "green", [ "h97.81", "v9.6" ] ],
+    [ "esp1:21", "chip2:SDA", "green", [ "h-38.4", "v9.6" ] ],
+    [ "esp1:GND.2", "servo1:GND", "black", [ "h-86.4", "v-268.8" ] ],
+    [ "vcc1:VCC", "servo1:V+", "red", [ "v0" ] ],
+    [ "gnd1:GND", "servo1:GND", "black", [ "v0" ] ],
+    [ "esp1:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp1:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp1:5V", "vcc1:VCC", "red", [ "h-0.15", "v-124.8", "h-518.4" ] ]
+  ],
+  "serialMonitor": { "display": "always", "newline": "lf", "convertEol": false },
+  "dependencies": { "chip-pca9685": "github:bonnyr/wokwi-pca9685-custom-chip@0.1.1" }
+}

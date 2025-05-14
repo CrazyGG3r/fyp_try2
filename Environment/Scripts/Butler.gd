@@ -181,9 +181,14 @@ func _on_episode_timer_tiemr_started():
 
 func cal_reward():
 	if is_moving_towards_goal(hexapodd, goal, hexapodd.linear_velocity):
-		master.reward += 2
+		master.reward += 0.005
 	if is_moving_towards_goal(ball, goal, ball.linear_velocity):
-		master.reward += 2
+		master.reward += 0.005
+		
+	if is_moving_away_from_goal(hexapodd, goal, hexapodd.linear_velocity):
+		master.reward -= 0.01
+	if is_moving_away_from_goal(ball, goal, ball.linear_velocity):
+		master.reward -= 0.01
 
 	
 	if calculate_polar_coordinate(hexapodd,obstacle).x < 50:
@@ -206,6 +211,12 @@ func cal_reward():
 	if calculate_x_distance(hexapodd,wall_left)< 170.0:
 		#print("left")
 		master.reward -= 0.002
+
+func is_moving_away_from_goal(entity, goal, velocity) -> bool:
+	var to_goal = (goal.global_position - entity.global_position).normalized()
+	var direction = velocity.normalized()
+	return to_goal.dot(direction) < -0.5
+
 func is_moving_towards_goal(entity, goal, velocity) -> bool:
 	var to_goal = (goal.global_position - entity.global_position).normalized()
 	var direction = velocity.normalized()

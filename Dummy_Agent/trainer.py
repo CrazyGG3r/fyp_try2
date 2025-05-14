@@ -76,7 +76,7 @@ def environment(screen,bg = None):
     
     
     brain = Agent(38,5)
-    # brain.load("Dummy_Agent\\Weights_2.0\\")
+    brain.load("Dummy_Agent\\Weights_2.0\\")
     batch_size = 64
     replay_interval = 32  # Replay every 10 steps
     save_interval = 1 #save every episode

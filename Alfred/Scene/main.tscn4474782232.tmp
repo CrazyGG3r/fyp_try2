@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bth87xnddqrbd"]
+
+[ext_resource type="Script" uid="uid://jlu1qvkwq75l" path="res://Scripts/main.gd" id="1_f6udf"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_f6udf")
+
+[node name="Log_panel" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="brain_output" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hexapod output" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

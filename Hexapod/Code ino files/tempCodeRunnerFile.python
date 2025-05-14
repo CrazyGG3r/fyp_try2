@@ -1,0 +1,23 @@
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+import time
+
+# Set up the driver (use your desired browser)
+driver = webdriver.Chrome()
+
+# Open the webpage
+driver.get('https://www.procom.com.pk/register')
+
+# Locate the dropdown element
+dropdown_element = driver.find_element("id", "dropdown_id")
+
+# Create a Select object
+dropdown = Select(dropdown_element)
+
+# Select by visible text
+dropdown.select_by_visible_text("FAST-NUCES, KARACHI")
+
+# Wait for 10 seconds to observe the selection
+time.sleep(10)
+
+driver.quit()
