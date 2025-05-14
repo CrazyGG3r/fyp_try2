@@ -73,20 +73,16 @@ def to_butler(screen,bg = None):
     all_butts = [button1,button2,button3]
     
     #-0-0-0--00-0-0-0-0-0-0- DQN AGENT
+    brain = Agent(38, 5)
+    last_episode = 168  # Use the same episode number you trained with
+    brain.load(f"Dummy_Agent/weights_2.0/brainep{last_episode}.weights.h5")
+
+    # Disable exploration for testing
+    brain.epsilon = 0  # Always use the learned policy
+    brain.epsilon_min = 0
     
+   
     
-    brain = Agent(38,5)
-    brain.load("Dummy_Agent\\Weights_2.0\\")
-    batch_size = 64
-    replay_interval = 32  # Replay every 10 steps
-    save_interval = 1 #save every episode
-    actions = 0
-    running = True
-    episode = 0
-    step = 0
-    save_dir = "Dummy_Agent/weights_2.0"
-    os.makedirs(save_dir, exist_ok=True)
-    brain.save(f"{save_dir}/brain_ep_{episode}.weights.h5")
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
@@ -94,47 +90,22 @@ def to_butler(screen,bg = None):
         if flag_connect:
             
             state_raw = receive_state()
-            if state_raw == None:
+            if state_raw is None:
                 continue
+                
+            # Remove reward and done flags (not needed for testing)
+            _ = state_raw.pop()  # reward
+            _ = state_raw.pop()  # done
             
-            reward = state_raw.pop()
-            done = state_raw.pop()
-            print("hello")    
             state = np.reshape(state_raw, (1, len(state_raw)))
+            
+            # Get action from policy (no random exploration)
             action = brain.act(state)
-            print(state_raw,reward,done)
+            print("Current state:", state_raw, "Selected action:", action)
             
+            # Send action to environment
             send_Action(action)
-
-
-            next_state_raw = receive_state()
-            if next_state_raw is None:
-                continue
-            print("lol")
-            reward = next_state_raw.pop()
-            done = next_state_raw.pop()
-            next_state = np.reshape(next_state_raw, (1, len(state_raw)))
-
-
-            if done == 1:
-                done = True
-                episode+= 1
-                brain.save(f"{save_dir}/brain_ep_{episode}.weights.h5")
-
                 
-            else:
-                done = False
-                
-            send_Action(4)
-
-            step += 1  # Track steps independently
-            
-            if step % replay_interval == 0 and len(brain.memory) >= batch_size:
-                print("Replaying...")
-                brain.replay(batch_size)
-
-            brain.remember(state,action,reward,next_state,done)
-            
         for a in all_butts:
             a.draw(screen)
         for event in pygame.event.get():

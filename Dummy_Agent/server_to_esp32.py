@@ -14,5 +14,16 @@ print(f"ESP32 connected from {addr}")
 while True:
     cmd = input("Enter command to send to ESP32: ")
     conn.sendall((cmd + "\n").encode())
-    if cmd == "exit" or cmd == "EXIT":
+
+    if cmd.upper() == "EXIT":
         break
+
+    data = b""
+    while not data.endswith(b"\n"):
+        chunk = conn.recv(1024)
+        if not chunk:
+            break
+        data += chunk
+
+    response = data.decode().strip()
+    print(f"ESP32: {response}")

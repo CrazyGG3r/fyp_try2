@@ -52,7 +52,8 @@ func route_message(sender: String, msg: String):
 	
 	elif sender == "ai":
 		if clients["hexapod"] and not waiting_for_hexapod:
-			clients["hexapod"].put_utf8_string(msg + "\n")
+			clients["hexapod"].put_data((msg + "\n").to_utf8_buffer())
+
 			log_("Sent to Hexapod: %s" % msg)
 
 	elif sender == "hexapod":
