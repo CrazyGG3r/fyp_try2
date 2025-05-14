@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=3 uid="uid://dg8juhk5oo4lb"]
+
+[ext_resource type="Script" uid="uid://lb6exxvaaf2v" path="res://Scripts/try_1.gd" id="1_w4hn0"]
+[ext_resource type="Script" uid="uid://ceyd21kju0y3v" path="res://Scripts/googly.gd" id="2_econg"]
+[ext_resource type="FontFile" uid="uid://s1q1gcepw5wl" path="res://Assets/Fonts/f4_Stoneyard.ttf" id="3_pp3hi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mi32s"]
+rough = true
+absorbent = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_w4hn0"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mi32s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0l8b"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3yocm"]
+material = SubResource("StandardMaterial3D_x0l8b")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yocm"]
+size = Vector2(1.6, 1.07143)
+
+[node name="hexapod" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_mi32s")
+linear_damp = 5.0
+angular_damp = 3.0
+script = ExtResource("1_w4hn0")
+torque_strength = 500000.0
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(32, 3.63798e-12)
+rotation = 1.57079
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="MeshInstance2D8" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(30, 30)
+rotation = 2.0944
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="MeshInstance2D7" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(30, -30)
+rotation = 1.0472
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="MeshInstance2D9" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(-32, 0)
+rotation = 1.57079
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="MeshInstance2D10" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(-30, -30)
+rotation = 2.0944
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="MeshInstance2D11" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0.364706, 1, 1)
+position = Vector2(-30, 30)
+rotation = 1.0472
+scale = Vector2(11.4024, 19.9277)
+mesh = SubResource("QuadMesh_w4hn0")
+
+[node name="body" type="MeshInstance2D" parent="."]
+modulate = Color(0.905882, 0, 0, 1)
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(40, 48)
+mesh = SubResource("QuadMesh_mi32s")
+
+[node name="googley" type="Node2D" parent="."]
+scale = Vector2(0.825, 0.825)
+script = ExtResource("2_econg")
+metadata/_edit_group_ = true
+
+[node name="eye2" type="MeshInstance2D" parent="googley"]
+position = Vector2(8.53394, -26.4575)
+scale = Vector2(15.085, 15.085)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye2_p" type="MeshInstance2D" parent="googley"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(8.53394, -26.4575)
+scale = Vector2(10.4, 11.84)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye" type="MeshInstance2D" parent="googley"]
+position = Vector2(-8.46606, -26.4575)
+scale = Vector2(15.085, 15.085)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye_p" type="MeshInstance2D" parent="googley"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-8.46606, -26.4575)
+scale = Vector2(10.4, 11.84)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye3" type="MeshInstance2D" parent="googley"]
+position = Vector2(-20.6349, -19.63)
+scale = Vector2(8.74, 8.74)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye3_p" type="MeshInstance2D" parent="googley"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-20.6349, -19.63)
+scale = Vector2(6.68, 6.71)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye4" type="MeshInstance2D" parent="googley"]
+position = Vector2(20.365, -19.63)
+scale = Vector2(8.74, 8.74)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="eye4_p" type="MeshInstance2D" parent="googley"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(20.3651, -19.63)
+scale = Vector2(6.68, 6.71)
+mesh = SubResource("SphereMesh_3yocm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.500002)
+scale = Vector2(50, 70)
+shape = SubResource("RectangleShape2D_3yocm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = -43.0
+offset_top = 55.0
+offset_right = 55.0
+offset_bottom = 83.0
+theme_override_fonts/normal_font = ExtResource("3_pp3hi")
+theme_override_font_sizes/normal_font_size = 29
+text = "Hexapod"
+scroll_active = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-40, -32, -41, -30, -24, -20, -23, -6, -42, -6, -42, 6, -23, 6, -24, 20, -41, 30, -36, 40, -18, 30, 19, 30, 36, 40, 42, 30, 25, 20, 22, 6, 42, 6, 42, -7, 23, -7, 24, -20, 42, -30, 36, -40, 19, -30, -18, -30, -36, -41)
+disabled = true

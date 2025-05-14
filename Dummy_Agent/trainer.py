@@ -7,6 +7,7 @@ import ast
 import json
 from noobs_cpu import Agent
 import numpy as np
+import os
 client_socket = None
 flag_connect = False
 def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9999):
@@ -28,9 +29,10 @@ def disconnect_from_server(screen= None, bg = None):
         print("Disconnected from the server.")
 
 def send_Action(action= 0):
-    actions = {0:"FK",1:"BK",2:"LT",3:"RT",4:"L2",5:"R2",6:"00"}
+    actions = {0:"FK",1:"BK",2:"R2",3:"L2",4:"00"}
     if client_socket:
         try:
+            print("About to send action:",action)
             client_socket.sendall(actions[action].encode('utf-8'))
             print(f"Action sent:{actions[action]}")
         except Exception as e:
@@ -41,7 +43,9 @@ def send_Action(action= 0):
 def receive_state(action = "None"):
     if client_socket:
         try:
+            print("Waiting to receive data")
             data = client_socket.recv(1024)
+            print("Data received: ",data)
             if data:
                 decoded_state = data.decode("utf-8")
                 # print("state: ", decoded_state)
@@ -71,15 +75,18 @@ def environment(screen,bg = None):
     #-0-0-0--00-0-0-0-0-0-0- DQN AGENT
     
     
-    brain = Agent(24,6)
-    brain.load("Dummy_Agent\\Weights\\brain_ep_626.weights.h5")
+    brain = Agent(38,5)
+    # brain.load("Dummy_Agent\\Weights_2.0\\")
     batch_size = 64
     replay_interval = 32  # Replay every 10 steps
     save_interval = 1 #save every episode
     actions = 0
     running = True
-    episode = 61
+    episode = 0
     step = 0
+    save_dir = "Dummy_Agent/weights_2.0"
+    os.makedirs(save_dir, exist_ok=True)
+    brain.save(f"{save_dir}/brain_ep_{episode}.weights.h5")
     while running:
         screen.fill((1,1,1))
         bg.draw(screen)
@@ -87,9 +94,12 @@ def environment(screen,bg = None):
         if flag_connect:
             
             state_raw = receive_state()
+            if state_raw == None:
+                continue
+            
             reward = state_raw.pop()
             done = state_raw.pop()
-                
+            print("hello")    
             state = np.reshape(state_raw, (1, len(state_raw)))
             action = brain.act(state)
             print(state_raw,reward,done)
@@ -98,28 +108,32 @@ def environment(screen,bg = None):
 
 
             next_state_raw = receive_state()
+            if next_state_raw is None:
+                continue
+            print("lol")
             reward = next_state_raw.pop()
             done = next_state_raw.pop()
             next_state = np.reshape(next_state_raw, (1, len(state_raw)))
 
+
             if done == 1:
                 done = True
                 episode+= 1
-                brain.save(f"Dummy_Agent\\Weights\\brain_ep_{episode}.weights.h5")
+                brain.save(f"{save_dir}/brain_ep_{episode}.weights.h5")
 
                 
             else:
                 done = False
                 
-            brain.remember(state,action,reward,next_state,done)
-            send_Action(6)
+            send_Action(4)
 
             step += 1  # Track steps independently
             
-            # if step % replay_interval == 0 and len(brain.memory) >= batch_size:
-            #     print("Replaying...")
-            #     brain.replay(batch_size)
+            if step % replay_interval == 0 and len(brain.memory) >= batch_size:
+                print("Replaying...")
+                brain.replay(batch_size)
 
+            brain.remember(state,action,reward,next_state,done)
             
         for a in all_butts:
             a.draw(screen)

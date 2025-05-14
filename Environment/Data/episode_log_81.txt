@@ -1,0 +1,9 @@
+ep: 0	reward: 82.1800000000009	timer: 10.0	goals: 0
+ep: 1	reward: -19.746	timer: 10.0	goals: 0
+ep: 2	reward: -112.453999999999	timer: 15.1	goals: 2
+ep: 3	reward: -31.5269999999998	timer: 10.0	goals: 0
+ep: 4	reward: -108.064999999999	timer: 15.5	goals: 1
+ep: 5	reward: -29.1059999999997	timer: 10.0	goals: 0
+ep: 6	reward: -137.299	timer: 10.0	goals: 0
+ep: 7	reward: -120.064999999999	timer: 10.0	goals: 0
+ep: 8	reward: -119.971	timer: 10.0	goals: 0

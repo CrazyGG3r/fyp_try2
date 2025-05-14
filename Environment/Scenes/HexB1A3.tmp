@@ -1,0 +1,209 @@
+[gd_scene load_steps=7 format=3 uid="uid://bofykc4ulteqy"]
+
+[ext_resource type="Script" path="res://Scripts/Hexapod_1.gd" id="1_e651a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_s25v0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_43f4u"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ymysd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvc6v"]
+size = Vector2(5, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dbg65"]
+size = Vector2(5, 20)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_e651a")
+
+[node name="Abdomen" type="Polygon2D" parent="."]
+position = Vector2(1.43051e-06, 0)
+scale = Vector2(96, 96)
+polygon = PackedVector2Array(-1.49011e-08, -0.583333, 0.25, -0.416667, 0.333333, -0.166667, 0.333333, 0.166667, 0.25, 0.333333, 0.166667, 0.416667, 0.0833333, 0.416667, -0.0833334, 0.416667, -0.166667, 0.416667, -0.25, 0.333333, -0.333333, 0.166667, -0.333333, -0.166667, -0.25, -0.416667)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Abdomen"]
+position = Vector2(-1.00376e-08, 5.01879e-09)
+scale = Vector2(0.0111979, 0.0111979)
+color = Color(0.0470588, 0.341176, 1, 1)
+polygon = PackedVector2Array(-24, -40, -32, -16, -32, 16, -24, 32, -16, 40, 16, 40, 24, 32, 32, 16, 32, -16, 24, -40, -4.76837e-07, -56)
+
+[node name="Polygon2D" type="Polygon2D" parent="Abdomen"]
+position = Vector2(-9.93409e-09, 4.96705e-09)
+scale = Vector2(0.0104167, 0.0104167)
+color = Color(1, 0.341176, 0.341176, 1)
+polygon = PackedVector2Array(-24, -40, -32, -16, -32, 16, -24, 32, -16, 40, 16, 40, 24, 32, 32, 16, 32, -16, 24, -40, -4.76837e-07, -56)
+
+[node name="Design" type="Node2D" parent="."]
+
+[node name="E1" type="MeshInstance2D" parent="Design"]
+position = Vector2(-13, -43)
+scale = Vector2(4, 4)
+mesh = SubResource("SphereMesh_s25v0")
+metadata/_edit_group_ = true
+
+[node name="Pupil" type="MeshInstance2D" parent="Design/E1"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")
+
+[node name="E2" type="MeshInstance2D" parent="Design"]
+position = Vector2(13, -43)
+scale = Vector2(4, 4)
+mesh = SubResource("SphereMesh_s25v0")
+metadata/_edit_group_ = true
+
+[node name="Pupil" type="MeshInstance2D" parent="Design/E2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")
+
+[node name="E3" type="MeshInstance2D" parent="Design"]
+position = Vector2(-5, -47)
+scale = Vector2(8.25905, 8.25)
+mesh = SubResource("SphereMesh_s25v0")
+metadata/_edit_group_ = true
+
+[node name="Pupil" type="MeshInstance2D" parent="Design/E3"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")
+
+[node name="E5" type="MeshInstance2D" parent="Design"]
+position = Vector2(5, -47)
+scale = Vector2(8.25905, 8.25)
+mesh = SubResource("SphereMesh_s25v0")
+metadata/_edit_group_ = true
+
+[node name="Pupil" type="MeshInstance2D" parent="Design/E5"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.242424)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("SphereMesh_43f4u")
+
+[node name="Scales" type="Node2D" parent="Design"]
+
+[node name="Scale_1" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(1.78814e-07, -40)
+scale = Vector2(9.849, 2.255)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="Scale_3" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(-4.26326e-14, 32)
+scale = Vector2(9.849, 2.255)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="Scale_2" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(-5, -4)
+rotation = 1.5708
+scale = Vector2(65.1884, 5.01)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="Scale_4" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(5, -4)
+rotation = 1.5708
+scale = Vector2(65.1884, 5.01)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="Scale_5" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(15, -4.5)
+rotation = 1.5708
+scale = Vector2(55.3774, 5.01)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="Scale_6" type="MeshInstance2D" parent="Design/Scales"]
+modulate = Color(0.337255, 0, 0.0352941, 1)
+position = Vector2(-15, -4.5)
+rotation = 1.5708
+scale = Vector2(55.3774, 5.01)
+mesh = SubResource("QuadMesh_ymysd")
+
+[node name="fin_right" type="Polygon2D" parent="Design/Scales"]
+position = Vector2(22, -5)
+scale = Vector2(0.5, 0.5)
+color = Color(0.337255, 0, 0.0352941, 1)
+polygon = PackedVector2Array(0, -24, 0, 32, 8, 24, 8, -16)
+
+[node name="fin_right2" type="Polygon2D" parent="Design/Scales"]
+position = Vector2(-22, -5)
+scale = Vector2(0.5, 0.5)
+color = Color(0.337255, 0, 0.0352941, 1)
+polygon = PackedVector2Array(0, -24, 0, 32, -8, 24, -8, -16)
+
+[node name="r_a" type="CollisionShape2D" parent="."]
+position = Vector2(34.1215, -52.0393)
+rotation = 0.785398
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+
+[node name="coxa" type="MeshInstance2D" parent="r_a"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")
+
+[node name="r_b" type="CollisionShape2D" parent="."]
+position = Vector2(48, 0)
+rotation = 1.57079
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+
+[node name="coxa" type="MeshInstance2D" parent="r_b"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")
+
+[node name="r_c" type="CollisionShape2D" parent="."]
+position = Vector2(32, 48)
+rotation = 2.35619
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="r_c"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")
+
+[node name="l_a" type="CollisionShape2D" parent="."]
+position = Vector2(-34, -52)
+rotation = -0.785397
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="l_a"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")
+
+[node name="l_b" type="CollisionShape2D" parent="."]
+position = Vector2(-48, 0)
+rotation = 1.57079
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="l_b"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")
+
+[node name="l_c" type="CollisionShape2D" parent="."]
+position = Vector2(-32, 48)
+rotation = 0.785397
+scale = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_bvc6v")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="l_c"]
+modulate = Color(0.0470588, 0.341176, 1, 1)
+position = Vector2(-1.90735e-06, 0)
+mesh = SubResource("QuadMesh_dbg65")

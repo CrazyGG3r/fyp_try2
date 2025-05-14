@@ -1,0 +1,375 @@
+[gd_scene load_steps=29 format=3 uid="uid://byoqfilosh0qw"]
+
+[ext_resource type="Script" path="res://Scenes/environment.gd" id="1_l84up"]
+[ext_resource type="PackedScene" uid="uid://bofykc4ulteqy" path="res://Scenes/Hexapod_1.tscn" id="2_0eu02"]
+[ext_resource type="Script" path="res://Scenes/STOP_env.gd" id="2_i20hj"]
+[ext_resource type="Script" path="res://Scripts/Handler.gd" id="2_okurt"]
+[ext_resource type="Script" path="res://Scripts/goal_Label.gd" id="2_rilcx"]
+[ext_resource type="Script" path="res://Scripts/Goal_right.gd" id="3_7j6h6"]
+[ext_resource type="Script" path="res://Scripts/episode_Value.gd" id="3_ajqfq"]
+[ext_resource type="Script" path="res://Scripts/Environment_name.gd" id="3_dv74r"]
+[ext_resource type="FontFile" uid="uid://s1q1gcepw5wl" path="res://Assets/Fonts/f4_Stoneyard.ttf" id="3_j2nwc"]
+[ext_resource type="Script" path="res://Scripts/reward_Value.gd" id="4_0rjl2"]
+[ext_resource type="Script" path="res://Scripts/timer_Value.gd" id="4_b7yta"]
+[ext_resource type="Script" path="res://Scripts/Start.gd" id="5_2p0y3"]
+[ext_resource type="Script" path="res://Scripts/game_no_Value.gd" id="5_ajuad"]
+[ext_resource type="Script" path="res://Scripts/Butler.gd" id="5_rgwml"]
+[ext_resource type="Script" path="res://Scripts/ticker.gd" id="8_imeex"]
+[ext_resource type="Script" path="res://Scripts/episode_Timer.gd" id="9_ns3wx"]
+[ext_resource type="Script" path="res://Scripts/ball_.gd" id="10_erudo"]
+[ext_resource type="Script" path="res://Scenes/ball_2.gd" id="15_ffr2i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cnh35"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sp5e2"]
+rough = true
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw7co"]
+size = Vector2(1, 0.37338)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gvkk"]
+size = Vector2(0.195176, 0.984365)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogj38"]
+size = Vector2(0.195176, 0.984365)
+
+[sub_resource type="QuadMesh" id="QuadMesh_x6inh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0log"]
+size = Vector2(128, 176)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_565rs"]
+radius = 27.06
+
+[sub_resource type="SphereMesh" id="SphereMesh_8e1er"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_45f5d"]
+
+[node name="Environment" type="Node2D"]
+script = ExtResource("1_l84up")
+
+[node name="Master Handler" type="Node2D" parent="."]
+script = ExtResource("2_okurt")
+
+[node name="Training Stats" type="VBoxContainer" parent="."]
+offset_left = 242.0
+offset_top = 13.0
+offset_right = 618.0
+offset_bottom = 147.0
+
+[node name="Label" type="RichTextLabel" parent="Training Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Training Stats"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 9
+
+[node name="Episode" type="HBoxContainer" parent="Training Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Training Stats/Episode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Episode		:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Training Stats/Episode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("3_ajqfq")
+
+[node name="GameNo" type="HBoxContainer" parent="Training Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Training Stats/GameNo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Game No	:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Training Stats/GameNo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("5_ajuad")
+
+[node name="Game score" type="VBoxContainer" parent="."]
+offset_left = 694.0
+offset_top = 16.0
+offset_right = 1070.0
+offset_bottom = 148.0
+
+[node name="Label" type="RichTextLabel" parent="Game score"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Game Score"
+fit_content = true
+scroll_active = false
+
+[node name="goal" type="HBoxContainer" parent="Game score"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Game score/goal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Goal         	:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Game score/goal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("2_rilcx")
+
+[node name="Score" type="HBoxContainer" parent="Game score"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Game score/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Score		:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Game score/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "00
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("4_0rjl2")
+
+[node name="time" type="HBoxContainer" parent="Game score"]
+layout_mode = 2
+alignment = 1
+
+[node name="episode_Timer" type="Timer" parent="Game score/time"]
+wait_time = 11.0
+script = ExtResource("9_ns3wx")
+
+[node name="each second" type="Timer" parent="Game score/time/episode_Timer"]
+autostart = true
+script = ExtResource("8_imeex")
+
+[node name="Label" type="RichTextLabel" parent="Game score/time"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+text = "Time         	:"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Game score/time"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+scroll_active = false
+script = ExtResource("4_b7yta")
+
+[node name="Environment_name" type="RichTextLabel" parent="."]
+offset_left = 432.0
+offset_top = 664.0
+offset_right = 1088.0
+offset_bottom = 784.0
+theme_override_fonts/normal_font = ExtResource("3_j2nwc")
+theme_override_font_sizes/normal_font_size = 33
+text = "The Colosseum
+"
+script = ExtResource("3_dv74r")
+
+[node name="STOP" type="Button" parent="."]
+offset_left = 1232.0
+offset_right = 1281.0
+offset_bottom = 31.0
+text = "STOP"
+script = ExtResource("2_i20hj")
+
+[node name="Start" type="Button" parent="."]
+texture_filter = 1
+offset_left = 563.0
+offset_top = 72.0
+offset_right = 619.0
+offset_bottom = 103.0
+text = "START"
+script = ExtResource("5_2p0y3")
+
+[node name="wals" type="MeshInstance2D" parent="."]
+modulate = Color(0.301961, 0.00784314, 0.145098, 1)
+position = Vector2(640, 424)
+scale = Vector2(942.739, 471.37)
+mesh = SubResource("BoxMesh_cnh35")
+metadata/_edit_lock_ = true
+
+[node name="wals2" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(640, 424)
+rotation = 3.14159
+scale = Vector2(902.245, 451.123)
+mesh = SubResource("BoxMesh_cnh35")
+metadata/_edit_lock_ = true
+
+[node name="top" type="StaticBody2D" parent="."]
+position = Vector2(622, 424)
+scale = Vector2(942.739, 471.37)
+physics_material_override = SubResource("PhysicsMaterial_sp5e2")
+
+[node name="coll" type="CollisionShape2D" parent="top"]
+position = Vector2(0, -0.6619)
+shape = SubResource("RectangleShape2D_mw7co")
+
+[node name="bottom" type="StaticBody2D" parent="."]
+position = Vector2(640, 883)
+scale = Vector2(942.739, 471.37)
+physics_material_override = SubResource("PhysicsMaterial_sp5e2")
+
+[node name="coll" type="CollisionShape2D" parent="bottom"]
+position = Vector2(0, -0.311857)
+shape = SubResource("RectangleShape2D_mw7co")
+
+[node name="right" type="StaticBody2D" parent="."]
+position = Vector2(640, 1342)
+scale = Vector2(942.739, 471.37)
+physics_material_override = SubResource("PhysicsMaterial_sp5e2")
+
+[node name="coll" type="CollisionShape2D" parent="right"]
+position = Vector2(0.577042, -1.94751)
+shape = SubResource("RectangleShape2D_4gvkk")
+
+[node name="left" type="StaticBody2D" parent="."]
+position = Vector2(640, 880)
+scale = Vector2(942.739, 471.37)
+physics_material_override = SubResource("PhysicsMaterial_sp5e2")
+
+[node name="coll" type="CollisionShape2D" parent="left"]
+position = Vector2(-0.577042, -0.967393)
+shape = SubResource("RectangleShape2D_ogj38")
+
+[node name="goal_barrier" type="StaticBody2D" parent="."]
+position = Vector2(736, 320)
+
+[node name="Goal_right" type="Area2D" parent="."]
+position = Vector2(736, 320)
+script = ExtResource("3_7j6h6")
+
+[node name="body" type="MeshInstance2D" parent="Goal_right"]
+position = Vector2(336, 96)
+rotation = -1.57079
+scale = Vector2(176.5, 120.5)
+mesh = SubResource("QuadMesh_x6inh")
+
+[node name="coll" type="CollisionShape2D" parent="Goal_right"]
+position = Vector2(336, 96)
+shape = SubResource("RectangleShape2D_o0log")
+
+[node name="ball_2" type="RigidBody2D" parent="."]
+position = Vector2(560, 428)
+mass = 0.046
+script = ExtResource("15_ffr2i")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball_2"]
+shape = SubResource("CircleShape2D_565rs")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ball_2"]
+scale = Vector2(53, 53)
+mesh = SubResource("SphereMesh_8e1er")
+
+[node name="ball_" type="RigidBody2D" parent="."]
+position = Vector2(984, 408)
+mass = 5.0
+script = ExtResource("10_erudo")
+
+[node name="Reset_positions" type="Node2D" parent="."]
+
+[node name="Hexapod" type="Marker2D" parent="Reset_positions"]
+position = Vector2(673, 422)
+
+[node name="Ball" type="Marker2D" parent="Reset_positions"]
+position = Vector2(769, 422)
+
+[node name="ground" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = -14
+position = Vector2(640, 360)
+scale = Vector2(1280, 720)
+mesh = SubResource("QuadMesh_45f5d")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="hexapod" parent="." groups=["hexapod"] instance=ExtResource("2_0eu02")]
+position = Vector2(404, 430)
+rotation = 1.5708
+scale = Vector2(1.055, 1.055)
+disable_mode = 2
+motion_mode = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hexapod"]
+polygon = PackedVector2Array(-34.1233, -4.73923, -35.0712, -21.8008, -28.4362, -37.9146, -48.3415, -58.7676, -40.7585, -66.3506, -21.8011, -47.3933, -0.000244141, -60.6635, 21.8008, -46.4456, 41.7059, -67.2987, 49.2889, -58.768, 27.488, -37.9148, 35.071, -17.0618, 35.0711, -4.7395, 63.5071, -5.68744, 63.5071, 5.68695, 34.1232, 5.68707, 35.0712, 18.0093, 25.5925, 34.1231, 46.4457, 54.9761, 38.8628, 62.5591, 18.0096, 41.7061, 17.0618, 43.6018, -17.0615, 43.602, -19.9051, 42.6541, -38.8624, 62.5594, -46.4453, 54.9765, -26.5402, 34.1233, -35.071, 17.0617, -35.0711, 5.68732, -63.5071, 5.68741, -63.5071, -5.68698, -35.0711, -5.68707)
+
+[node name="Butler" type="Node2D" parent="."]
+script = ExtResource("5_rgwml")
+
+[connection signal="connected" from="." to="Butler" method="_on_environment_connected"]
+[connection signal="handel_action" from="." to="hexapod" method="_on_environment_handel_action"]
+[connection signal="start" from="." to="Game score/time/episode_Timer" method="_on_environment_start"]
+[connection signal="handel_action" from="Master Handler" to="hexapod" method="_on_master_handler_handel_action"]
+[connection signal="re_timer" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_re_timer"]
+[connection signal="start" from="Master Handler" to="Game score/time/episode_Timer" method="_on_master_handler_start"]
+[connection signal="tiemr_started" from="Game score/time/episode_Timer" to="Game score/time/episode_Timer/each second" method="_on_episode_timer_tiemr_started"]
+[connection signal="tiemr_started" from="Game score/time/episode_Timer" to="Butler" method="_on_episode_timer_tiemr_started"]
+[connection signal="timeout" from="Game score/time/episode_Timer" to="Master Handler" method="_on_episode_timer_timeout"]
+[connection signal="timeout" from="Game score/time/episode_Timer" to="Butler" method="_on_episode_timer_timeout"]
+[connection signal="timeout" from="Game score/time/episode_Timer/each second" to="Butler" method="_on_each_second_timeout"]
+[connection signal="pressed" from="STOP" to="STOP" method="_on_pressed"]
+[connection signal="pressed" from="Start" to="Master Handler" method="_on_start_pressed"]
+[connection signal="body_entered" from="Goal_right" to="Master Handler" method="_on_goal_right_body_entered"]
+[connection signal="body_entered" from="ball_" to="ball_" method="_on_body_entered"]
+[connection signal="body_entered" from="ball_" to="Butler" method="_on_ball__body_entered"]
+[connection signal="action" from="hexapod" to="Butler" method="_on_hexapod_action"]
+[connection signal="send_state_vector" from="Butler" to="Master Handler" method="_on_butler_send_state_vector"]

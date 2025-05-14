@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkxne3iiax1ao"]
+
+[ext_resource type="FontFile" uid="uid://b7pv26mtipbr2" path="res://Assets/Fonts/f1_colossusjag.ttf" id="1_15o2q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_15o2q"]
+bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8t61"]
+albedo_color = Color(0.524085, 0.569214, 0.829528, 1)
+texture_filter = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_15o2q"]
+material = SubResource("StandardMaterial3D_f8t61")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8t61"]
+
+[node name="obstacle" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_15o2q")
+freeze = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.188235, 0.352941, 0.54902, 1)
+scale = Vector2(70, 70)
+mesh = SubResource("SphereMesh_15o2q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(3.5, 3.5)
+shape = SubResource("CircleShape2D_f8t61")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -35.0
+offset_top = 31.0
+offset_right = 50.0
+offset_bottom = 71.0
+theme_override_fonts/normal_font = ExtResource("1_15o2q")
+theme_override_font_sizes/normal_font_size = 30
+text = "DOOM"

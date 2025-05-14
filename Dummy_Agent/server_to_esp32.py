@@ -1,25 +1,18 @@
 import socket
 
-HOST = "0.0.0.0"  # Listen on all interfaces
-PORT = 9999 
+HOST = '0.0.0.0'
+PORT = 1234
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen(1)
 
-print(f"Server started on {HOST}:{PORT}, waiting for ESP32...")
-
+print("Server started. Waiting for ESP32 to connect...")
 conn, addr = server.accept()
-print(f"ESP32 Connected from {addr}")
+print(f"ESP32 connected from {addr}")
 
 while True:
-    command = input("Enter command: ").strip()
-    if command.lower() == "exit":
+    cmd = input("Enter command to send to ESP32: ")
+    conn.sendall((cmd + "\n").encode())
+    if cmd == "exit" or cmd == "EXIT":
         break
-
-    conn.sendall((command + "\n").encode())  # Send command
-    print("Sent:", command)
-
-conn.close()
-server.close()
-print("Server closed.")

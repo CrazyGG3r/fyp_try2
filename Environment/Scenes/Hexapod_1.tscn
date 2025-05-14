@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bofykc4ulteqy"]
 
-[ext_resource type="Script" path="res://Scripts/Hexapod_1.gd" id="1_e651a"]
+[ext_resource type="Script" uid="uid://et3iy3axbs28" path="res://Scripts/Hexapod_1.gd" id="1_e651a"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_s25v0"]
 
@@ -14,10 +14,10 @@ size = Vector2(5, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_dbg65"]
 size = Vector2(5, 20)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="RigidBody2D"]
 script = ExtResource("1_e651a")
 
-[node name="Abdomen" type="CollisionPolygon2D" parent="."]
+[node name="Abdomen" type="Polygon2D" parent="."]
 position = Vector2(1.43051e-06, 0)
 scale = Vector2(96, 96)
 polygon = PackedVector2Array(-1.49011e-08, -0.583333, 0.25, -0.416667, 0.333333, -0.166667, 0.333333, 0.166667, 0.25, 0.333333, 0.166667, 0.416667, 0.0833333, 0.416667, -0.0833334, 0.416667, -0.166667, 0.416667, -0.25, 0.333333, -0.333333, 0.166667, -0.333333, -0.166667, -0.25, -0.416667)

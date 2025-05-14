@@ -5,6 +5,7 @@ signal touched_ball()
 var ball_scene = preload("res://Scenes/ball.tscn")
 var ball: RigidBody2D
 
+
 func _ready():
 	load_ball()
 	
@@ -26,8 +27,3 @@ func _on_body_entered(body):
 	if body.is_in_group("hexapodd"):
 		touched_ball.emit()  # Emit custom signal when player collides
 		print("Player touched the ball!")
-
-
-#func _on_area_2d_body_entered(body):
-	#if body.is_in_group("hexapod only"):
-		#print("please be you ")

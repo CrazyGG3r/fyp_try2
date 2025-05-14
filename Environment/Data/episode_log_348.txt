@@ -1,0 +1,1 @@
+ep: 0	reward: 62.1170000000005	timer: 10.0	goals: 0

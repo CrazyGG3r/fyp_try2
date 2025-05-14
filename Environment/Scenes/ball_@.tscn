@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk3c12oimsx04"]
+
+[ext_resource type="FontFile" uid="uid://s1q1gcepw5wl" path="res://Assets/Fonts/f4_Stoneyard.ttf" id="1_8joee"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0l8b"]
+bounce = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_mi32s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3yocm"]
+radius = 0.5
+
+[node name="ball" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_x0l8b")
+linear_damp = 5.0
+angular_damp = 2.5
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(40, 40)
+mesh = SubResource("SphereMesh_mi32s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(40, 40)
+shape = SubResource("CircleShape2D_3yocm")
+debug_color = Color(0.84612, 0.294808, 0.604185, 0.42)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -23.0
+offset_top = 21.0
+offset_right = 23.0
+offset_bottom = 61.0
+theme_override_fonts/normal_font = ExtResource("1_8joee")
+theme_override_font_sizes/normal_font_size = 25
+text = "ball"
+scroll_active = false

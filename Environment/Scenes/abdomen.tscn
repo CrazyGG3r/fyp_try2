@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b57ssadvd2nqa"]
 
-[ext_resource type="Script" path="res://Scenes/abdomen.gd" id="1_asc4j"]
+[ext_resource type="Script" uid="uid://cttlye8y4p2sx" path="res://Scenes/abdomen.gd" id="1_asc4j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ix2"]
 size = Vector2(1, 1)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2a8j270obwls"]
+[gd_scene load_steps=9 format=3 uid="uid://c2a8j270obwls"]
 
 [ext_resource type="PackedScene" uid="uid://bwia7rdevtamy" path="res://Scenes/bgmenu.tscn" id="1_8ctpd"]
 [ext_resource type="FontFile" uid="uid://bw5nrojerqo51" path="res://Assets/Fonts/f2_Pixelmax-Regular.otf" id="2_ga8v5"]
 [ext_resource type="FontFile" uid="uid://c57nj1pbkaw0q" path="res://Assets/Fonts/f3_PIXEL-LI.TTF" id="3_y1xkj"]
-[ext_resource type="Script" path="res://Scripts/Host.gd" id="4_7m2gk"]
-[ext_resource type="Script" path="res://Scripts/Exit.gd" id="5_xxru5"]
+[ext_resource type="Script" uid="uid://cq3yqnlg4cxcg" path="res://Scripts/Host.gd" id="4_7m2gk"]
+[ext_resource type="Script" uid="uid://cuiuvuk20elyh" path="res://Scripts/Exit.gd" id="5_xxru5"]
+[ext_resource type="AudioStream" uid="uid://chw3pc43b7i4v" path="res://Assets/Audio/Twilight of the Gods.mp3" id="6_opfnp"]
 
 [sub_resource type="Theme" id="Theme_3ir4v"]
 
@@ -17,42 +18,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
 [node name="bg" parent="." instance=ExtResource("1_8ctpd")]
+follow_viewport_enabled = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Container" type="Container" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -269.0
+offset_top = -240.0
+offset_right = 270.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.156863, 0, 0, 0.490196)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -242.0
+offset_right = 242.0
+offset_bottom = 350.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.6, 0.42, 0.43, 1)
 clip_contents = false
 layout_mode = 2
-offset_left = 404.0
-offset_top = 64.0
-offset_right = 876.0
-offset_bottom = 144.0
-pivot_offset = Vector2(236, 25)
 theme_override_colors/font_outline_color = Color(1, 0.435294, 0.364706, 1)
 theme_override_fonts/normal_font = ExtResource("2_ga8v5")
 theme_override_font_sizes/normal_font_size = 76
 text = "COLOSSEUM"
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 552.0
-offset_top = 152.0
-offset_right = 728.0
-offset_bottom = 418.0
-metadata/_edit_group_ = true
-
-[node name="Host" type="Button" parent="VBoxContainer"]
+[node name="Host" type="Button" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.847059, 0.690196, 0.690196, 1)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_3ir4v")
 theme_override_colors/font_hover_pressed_color = Color(0.870588, 0.00392157, 0, 1)
 theme_override_colors/font_hover_color = Color(0.4, 0.270588, 0.27451, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.847059, 0.717647, 0.721569, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_y1xkj")
 theme_override_font_sizes/font_size = 41
 text = "Host
@@ -60,7 +92,7 @@ text = "Host
 flat = true
 script = ExtResource("4_7m2gk")
 
-[node name="Test Connections" type="Button" parent="VBoxContainer"]
+[node name="Test Connections" type="Button" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.847059, 0.690196, 0.690196, 1)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -73,7 +105,7 @@ text = "Test "
 icon = SubResource("PlaceholderTexture2D_jitxi")
 flat = true
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.847059, 0.690196, 0.690196, 1)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -86,7 +118,7 @@ text = "Settings"
 icon = SubResource("PlaceholderTexture2D_jitxi")
 flat = true
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="Credits" type="Button" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.847059, 0.690196, 0.690196, 1)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -99,7 +131,7 @@ text = "Credits"
 icon = SubResource("PlaceholderTexture2D_jitxi")
 flat = true
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="ColorRect/VBoxContainer"]
 modulate = Color(0.847059, 0.690196, 0.690196, 1)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -114,5 +146,11 @@ icon = SubResource("PlaceholderTexture2D_jitxi")
 flat = true
 script = ExtResource("5_xxru5")
 
-[connection signal="pressed" from="VBoxContainer/Host" to="VBoxContainer/Host" method="_on_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer/Exit" method="_on_pressed"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_opfnp")
+volume_db = 4.09
+autoplay = true
+playback_type = 1
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/Host" to="ColorRect/VBoxContainer/Host" method="_on_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit" to="ColorRect/VBoxContainer/Exit" method="_on_pressed"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dnj1yscq2gknu"]
 
-[ext_resource type="Script" path="res://Scripts/connect.gd" id="1_tmgkc"]
+[ext_resource type="Script" uid="uid://ce0603mmyt8ng" path="res://Scripts/connect.gd" id="1_tmgkc"]
 [ext_resource type="FontFile" uid="uid://b7pv26mtipbr2" path="res://Assets/Fonts/f1_colossusjag.ttf" id="2_480jd"]
-[ext_resource type="Script" path="res://Scripts/Back Button.gd" id="3_04xcu"]
+[ext_resource type="Script" uid="uid://kx4c028y1wa" path="res://Scripts/Back Button.gd" id="3_04xcu"]
 [ext_resource type="FontFile" uid="uid://s1q1gcepw5wl" path="res://Assets/Fonts/f4_Stoneyard.ttf" id="4_t0bcc"]
-[ext_resource type="Script" path="res://Scripts/Port_Input.gd" id="5_86ju7"]
+[ext_resource type="Script" uid="uid://dcagkqrdpj0r5" path="res://Scripts/Port_Input.gd" id="5_86ju7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_tua3m"]
 size = Vector2(1920, 1080)
