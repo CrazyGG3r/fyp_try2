@@ -2,4 +2,4 @@
 
 By:
 [Shaheer Ul islam](https://github.com/CrazGG3r)
-[Saeed Saleem](https://github.com/msaeeds>)
+[Saeed Saleem](https://github.com/msaeeds)
