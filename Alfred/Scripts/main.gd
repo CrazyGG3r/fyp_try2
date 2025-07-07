@@ -43,12 +43,12 @@ func poll_clients():
 
 func route_message(sender: String, msg: String):
 	if sender == "butler":
-		if not waiting_for_hexapod and clients["ai"]:
-			clients["ai"].put_utf8_string(msg + "\n")
+		if  clients["ai"]:
+			clients["ai"].put_data((msg + "\n").to_utf8_buffer())
 			waiting_for_hexapod = true
 			log_("Sent to AI: %s" % msg)
 		else:
-			log_("Ignored Butler msg: waiting for hexapod.")
+			log_("AI not connected")
 	
 	elif sender == "ai":
 		if clients["hexapod"] and not waiting_for_hexapod:

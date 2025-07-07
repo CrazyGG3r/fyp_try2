@@ -29,7 +29,7 @@ def disconnect_from_server(screen= None, bg = None):
         print("Disconnected from the server.")
 
 def send_Action(action= 0):
-    actions = {0:"FK",1:"BK",2:"R2",3:"L2",4:"00"}
+    actions = {0:"FK",1:"BK",2:"L2",3:"R2",4:"00"}
     if client_socket:
         try:
             print("About to send action:",action)
@@ -74,8 +74,8 @@ def to_butler(screen,bg = None):
     
     #-0-0-0--00-0-0-0-0-0-0- DQN AGENT
     brain = Agent(38, 5)
-    last_episode = 168  # Use the same episode number you trained with
-    brain.load(f"Dummy_Agent/weights_2.0/brainep{last_episode}.weights.h5")
+    last_episode = 481  # Use the same episode number you trained with
+    brain.load(f"Dummy_Agent/weights_2.0/brain_ep_{last_episode}.weights.h5")
 
     # Disable exploration for testing
     brain.epsilon = 0  # Always use the learned policy
@@ -83,7 +83,7 @@ def to_butler(screen,bg = None):
     
    
     
-    while running:
+    while True:
         screen.fill((1,1,1))
         bg.draw(screen)
         clicked_buttons = []
