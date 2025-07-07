@@ -1,4 +1,5 @@
-# fyp_try2
-second times not the charm
+# DRL Architecture to train a Hexapod Robot
 
-*plays twilight of the gods opening soundtrack*
+By:
+[Shaheer Ul islam](https://github.com/CrazGG3r)
+[Saeed Saleem](https://github.com/msaeeds>)
