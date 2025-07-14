@@ -21,7 +21,7 @@ def connect_to_env(screen = None, Background = None, addr = 'localhost',port = 9
         flag_connect = True
     except Exception as e:
         print(f"Connection failed: {e}")
-        return None
+        return None 
 
 def disconnect_from_server(screen= None, bg = None):
     if client_socket:
